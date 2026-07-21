@@ -8,9 +8,12 @@ const SERVER_URL = `https://${projectId}.supabase.co/functions/v1/make-server-10
 // Carla's Calendly scheduling link — themed to the dark editorial palette.
 const CALENDLY_URL = 'https://calendly.com/chahwancarla1/30min';
 const CALENDLY_EMBED_URL = `${CALENDLY_URL}?hide_gdpr_banner=1&background_color=14151A&text_color=F4F1EA&primary_color=E8963C`;
-// Tall enough that the full calendar fits without Calendly's own inner
-// scrollbar — the page's normal scroll handles it instead.
-const CALENDLY_HEIGHT = 1050;
+// Height shown while the widget loads. Once Calendly reports its real content
+// height (see calendly.page_height below), the frame resizes to match so there's
+// no inner scrollbar and no empty space beneath the calendar.
+const CALENDLY_HEIGHT = 700;
+// Ignore transient tiny heights Calendly emits mid-load (e.g. 2px, 26px).
+const CALENDLY_MIN_HEIGHT = 400;
 
 /**
  * Warm up Calendly as early as possible: open the network connections to its
@@ -46,6 +49,7 @@ function preloadCalendly() {
 function CalendlyEmbed() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [loaded, setLoaded] = useState(false);
+  const [height, setHeight] = useState(CALENDLY_HEIGHT);
 
   useEffect(() => {
     preloadCalendly();
@@ -70,8 +74,13 @@ function CalendlyEmbed() {
     const onMessage = (e: MessageEvent) => {
       if (e.origin.indexOf('calendly.com') === -1) return;
       const data = e.data;
-      if (data && typeof data.event === 'string' && data.event.indexOf('calendly') === 0) {
-        setLoaded(true);
+      if (!data || typeof data.event !== 'string' || data.event.indexOf('calendly') !== 0) return;
+      setLoaded(true);
+      // Calendly reports its content height per step — resize the frame to fit,
+      // ignoring the transient tiny values it emits mid-load.
+      if (data.event === 'calendly.page_height' && data.payload && typeof data.payload.height === 'string') {
+        const px = parseInt(data.payload.height, 10);
+        if (!Number.isNaN(px) && px >= CALENDLY_MIN_HEIGHT) setHeight(px);
       }
     };
     window.addEventListener('message', onMessage);
@@ -87,7 +96,7 @@ function CalendlyEmbed() {
   }, []);
 
   return (
-    <div style={{ position: 'relative', minHeight: CALENDLY_HEIGHT, width: '100%' }}>
+    <div style={{ position: 'relative', height, width: '100%', transition: 'height 0.3s ease' }}>
       {!loaded && (
         <div
           style={{
@@ -100,7 +109,7 @@ function CalendlyEmbed() {
           <p style={{ fontFamily: T.sans, fontSize: 16, fontWeight: 500, color: T.sage }}>Loading available times…</p>
         </div>
       )}
-      <div ref={containerRef} style={{ minWidth: 320, height: CALENDLY_HEIGHT, width: '100%' }} />
+      <div ref={containerRef} style={{ minWidth: 320, height: '100%', width: '100%' }} />
     </div>
   );
 }
