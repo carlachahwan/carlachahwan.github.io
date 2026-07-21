@@ -266,7 +266,7 @@ export default function ContactPage() {
 
             {/* Right: Contact Form / Scheduler */}
             <div className="lg:col-span-3">
-              <div style={{ background: T.bgCard, borderRadius: 16, border: `1px solid ${T.line}`, padding: '36px 32px' }}>
+              <div style={{ background: T.bgCard, borderRadius: 16, border: `1px solid ${T.line}`, padding: '36px 32px', overflow: 'hidden' }}>
 
                 {/* Tabs */}
                 <div style={{ display: 'flex', gap: 6, background: T.bgSoft, border: `1px solid ${T.line}`, borderRadius: 10, padding: 5, marginBottom: 28 }}>
@@ -313,7 +313,9 @@ export default function ContactPage() {
                       </h2>
                       <p style={{ fontSize: 16, color: T.sage }}>Pick a time that works for you — happy to chat through your project scope before any commitment.</p>
                     </div>
-                    <div style={{ borderRadius: 12, overflow: 'hidden', border: `1px solid ${T.line}` }}>
+                    {/* Full-bleed to the card edges so the calendar itself renders
+                        larger without changing the card's overall size. */}
+                    <div style={{ marginLeft: -32, marginRight: -32, marginBottom: -36, borderTop: `1px solid ${T.line}` }}>
                       <CalendlyEmbed />
                     </div>
                   </div>
