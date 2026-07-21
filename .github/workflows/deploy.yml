@@ -23,6 +23,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Enables Pages and sets its source to GitHub Actions via the API, so the
+      # built site (not the raw repo root) is what gets published.
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
