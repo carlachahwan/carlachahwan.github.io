@@ -113,7 +113,15 @@ export default function ProjectsPage({ onNavigate, initialTab = 'case-studies' }
       {/* Tabs */}
       <section style={{ background: T.bg, borderTop: `1px solid ${T.line}`, position: 'sticky', top: 72, zIndex: 20 }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="flex flex-wrap gap-8" role="tablist" aria-label="Project categories">
+          {/* Single row on every screen — scrolls horizontally on narrow phones
+              instead of wrapping onto multiple lines. */}
+          <style>{`.tabs-scroll::-webkit-scrollbar { display: none; }`}</style>
+          <div
+            className="tabs-scroll flex flex-nowrap gap-6 sm:gap-8 overflow-x-auto"
+            role="tablist"
+            aria-label="Project categories"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' as any }}
+          >
             {TABS.map(({ key, label }) => {
               const active = tab === key;
               return (
@@ -125,14 +133,16 @@ export default function ProjectsPage({ onNavigate, initialTab = 'case-studies' }
                   className="relative transition-colors"
                   style={{
                     fontFamily: T.sans,
-                    fontSize: 15.5,
+                    fontSize: 'clamp(13.5px, 3.4vw, 15.5px)',
                     fontWeight: active ? 600 : 500,
                     letterSpacing: '0.02em',
                     color: active ? T.amber : T.sage,
                     background: 'none',
                     border: 'none',
                     cursor: 'pointer',
-                    padding: '20px 0',
+                    padding: '18px 0',
+                    whiteSpace: 'nowrap',
+                    flexShrink: 0,
                   }}
                   onMouseEnter={e => { if (!active) e.currentTarget.style.color = T.text; }}
                   onMouseLeave={e => { if (!active) e.currentTarget.style.color = T.sage; }}

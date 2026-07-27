@@ -214,11 +214,14 @@ function Ch1Visual() {
   return (
     <div style={{ margin: '28px 0' }}>
       <BoardLabel>Qatar Market Analysis — five findings</BoardLabel>
-      <div style={autoGrid(230)}>
+      {/* 3 on the first row, 2 on the second (lg); cards stretch to equal
+          height per row and each card's UX Implication footer sits at the
+          bottom, so the footers line up across the row. */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {findings.map(f => <FindingCard key={f.title} {...f} />)}
       </div>
       <BoardLabel color={GOLD}>Qatar Opportunity Sizing — three white spaces</BoardLabel>
-      <div style={autoGrid(230)}>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {opportunities.map(o => <FindingCard key={o.title} {...o} />)}
       </div>
     </div>
@@ -456,11 +459,11 @@ function Ch4Visual() {
         ))}
       </div>
 
-      <div style={{ background: '#14151A', border: '1px solid #fecaca', borderRadius: 12, padding: '14px 18px', display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+      <div style={{ background: 'rgba(248,113,113,0.08)', border: '1px solid rgba(248,113,113,0.4)', borderRadius: 12, padding: '14px 18px', display: 'flex', gap: 12, alignItems: 'flex-start' }}>
         <div style={{ fontSize: 24, flexShrink: 0 }}>⚠️</div>
         <div>
-          <div style={{ fontSize: 14, fontWeight: 800, color: '#dc2626', marginBottom: 4 }}>THE ANTI-PATTERN: Feature Dumping</div>
-          <div style={{ fontSize: 15, color: '#7f1d1d', lineHeight: 1.6 }}>
+          <div style={{ fontSize: 14, fontWeight: 800, color: '#f87171', marginBottom: 4, letterSpacing: '0.02em' }}>THE ANTI-PATTERN: Feature Dumping</div>
+          <div style={{ fontSize: 15, color: '#EBBEBE', lineHeight: 1.6 }}>
             Apps that launch with 20 features to compete immediately create cognitive overload, dilute their brand proposition,
             and fail to build the trust required for users to return. More features ≠ more value.
           </div>
@@ -533,7 +536,7 @@ function Ch6Visual() {
     {
       label: 'Route B', title: 'Standalone Lifestyle Brand', color: PURPLE,
       pros: ['Full creative freedom', 'No legacy brand baggage'],
-      cons: ['Zero inherited trust', 'High CAC to build brand from scratch'],
+      cons: ['Zero inherited trust', 'High customer acquisition cost (CAC) to build brand from scratch'],
       selected: false,
     },
     {

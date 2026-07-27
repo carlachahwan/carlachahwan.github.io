@@ -65,6 +65,14 @@ export default function HomePage({ onNavigate }: HomePageProps) {
   return (
     <div style={{ background: T.bg, fontFamily: T.sans }}>
       <WorkArtKeyframes />
+      {/* On phones the card rows below become horizontal swipe carousels; on
+          larger screens they revert to a static grid. */}
+      <style>{`
+        .hcar { scroll-snap-type: x mandatory; scroll-padding-left: 24px; }
+        .hcar::-webkit-scrollbar { display: none; }
+        .hcar { scrollbar-width: none; -ms-overflow-style: none; }
+        .hcar > * { scroll-snap-align: start; }
+      `}</style>
       {/* Hero */}
       <section
         className="relative overflow-hidden"
@@ -152,11 +160,11 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="hcar flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto sm:overflow-visible -mx-6 px-6 sm:mx-0 sm:px-0">
             {expertise.map(({ icon, accent, title, desc }) => (
               <div
                 key={title}
-                className="transition-all"
+                className="transition-all shrink-0 basis-[78%] sm:basis-auto"
                 style={{ background: T.bgCard, border: `1px solid ${T.line}`, borderRadius: 10, padding: 28 }}
                 onMouseEnter={e => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = accent; el.style.boxShadow = glow(accent, 0.16); }}
                 onMouseLeave={e => { const el = e.currentTarget as HTMLDivElement; el.style.borderColor = T.line; el.style.boxShadow = 'none'; }}
@@ -179,7 +187,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             <div>
               <Eyebrow color={T.amber}>Featured Work</Eyebrow>
               <h2 style={{ fontFamily: T.serif, fontSize: 'clamp(32px, 3.5vw, 48px)', fontWeight: 300, color: T.text, letterSpacing: '-0.025em', lineHeight: 1.1, marginTop: 18 }}>
-                Three ways I work
+                Explore by category
               </h2>
             </div>
             <button
@@ -191,11 +199,11 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="hcar flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible -mx-6 px-6 md:mx-0 md:px-0">
             {workCategories.map(({ label, title, description, art: Art }) => (
               <div
                 key={title}
-                className="overflow-hidden transition-all cursor-pointer relative flex flex-col"
+                className="overflow-hidden transition-all cursor-pointer relative flex flex-col shrink-0 basis-[85%] md:basis-auto"
                 style={{ border: `1px solid ${T.line}`, background: T.bgCard, borderRadius: 12 }}
                 onClick={() => onNavigate('projects')}
                 onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = T.amber; }}

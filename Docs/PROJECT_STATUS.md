@@ -6,6 +6,21 @@
 
 ---
 
+## 0.0000000 Super App polish + Mobile Responsiveness — 16 July 2026
+
+**Super App content fixes**
+- **Ch1 finding cards**: the two `autoGrid(230)` grids (auto-fit → gave 4+1) replaced with responsive Tailwind grids. Findings = `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3` → **3 on row 1, 2 on row 2** on desktop; opportunities = `sm:grid-cols-3`. Grid stretch + FindingCard's `marginTop:auto` footer = equal card heights per row with UX Implication footers aligned (verified: row 1 all 318px, footers at same bottom). Fixes the taller "Diverse & Mobile Population" card.
+- **Ch4 anti-pattern** legibility: was `#dc2626` heading / `#7f1d1d` body (near-invisible maroon on dark) → heading `#f87171`, body `#EBBEBE`, soft red-tint bg/border. Verified computed colours.
+- **Ch6**: "High CAC…" → "High customer acquisition cost (CAC)…".
+
+**Mobile responsiveness (audited at Android 360 & iPhone 390)**
+- **Projects tabs** no longer wrap onto multiple lines — the row is now `flex-nowrap overflow-x-auto` (scrollbar hidden), font `clamp(13.5px…15.5px)`, tabs `whiteSpace:nowrap; flex-shrink:0`. Verified all 3 tabs share one row (top=73) and scroll.
+- **Home carousels**: Core Expertise (4) and Featured Work (3) card rows are now horizontal swipe carousels on mobile (`hcar flex overflow-x-auto` + scroll-snap, `basis-[78–85%]` peeking next card), reverting to grid at `sm`/`md`. Bleed to screen edge via `-mx-6 px-6`.
+- **Featured Work headline** "Three ways I work" → **"Explore by category"** (the cards are category entry points, not work methods).
+- Full audit: **no horizontal page overflow** on Home, Projects, Contact, or any detail page at 360/390. The only >viewport elements are the Ch2 feature table and mockups, which live inside their own `overflow-x:auto` boxes (intended).
+
+---
+
 ## 0.000000 Logo Cleanup + Interactive Case Studies — 16 July 2026
 
 **Client logos — white backgrounds removed.** Azadea, SALIC, Knowledge Group and Quick Pay had opaque white/off-white backgrounds baked into their image (Knowledge Group was even a JPG), so on their cream tiles they showed as mismatched patches. Fixed with a PIL script (`Pillow` installed): keyed near-white → transparent (soft alpha ramp, d≤10 transparent → d≥40 opaque), re-encoded as transparent PNG, re-embedded as base64 in `clientLogoData.tsx`. All four are dark/coloured art on white, so keying was safe (no white *in* the art). Verified: art intact, no halos, blends into the cream tile.
