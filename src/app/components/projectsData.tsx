@@ -9,7 +9,7 @@
  */
 import { ReactNode } from 'react';
 import { Page } from '../App';
-import { One2BuyOnboarding, One2BuyCountry, One2BuyMarketplace, One2BuyLogin, One2BuyProductDetail } from './One2BuyMockups';
+import { One2BuyMarketplace, One2BuyProductDetail, One2BuyShop, One2BuyCreateAd, One2BuyChat } from './One2BuyMockups';
 import {
   QuickPayLanding, QuickPayOnboarding, QuickPayServices,
   KscHome, KscNewsIndex, KscArticle,
@@ -141,13 +141,13 @@ export const one2buyData: ProjectData = {
   galleries: [
     {
       label: 'The UI screens',
-      note: 'Recreated from the Figma source — the buy/sell duality, localisation and trust, resolved on screen. Tap any screen to view it larger.',
+      note: 'The screens that carry the platform’s purpose — browse, buy, and sell in one place. Recreated from the Figma source; tap any screen to view it larger.',
       shots: [
-        { element: <One2BuyOnboarding />, caption: 'Onboarding — the buy/sell duality stated up front: “Open Your Own Shop” or “Start Shopping”.' },
-        { element: <One2BuyCountry />, caption: 'Language & country — Arabic/English and seven GCC markets chosen before the first screen, so localisation is structural.' },
-        { element: <One2BuyMarketplace />, caption: 'Marketplace — category browse with search and a persistent bottom nav; “Sell” sits center-stage.' },
-        { element: <One2BuyLogin />, caption: 'Login — account verification routed through WhatsApp, in the user’s chosen language.' },
-        { element: <One2BuyProductDetail />, caption: 'Product detail — seller identity, related items and a “Chat to Buy” action at the point of transaction.' },
+        { element: <One2BuyMarketplace />, caption: 'Marketplace — category browse with search and a persistent bottom nav where “Sell” sits center-stage, inviting every user to list.' },
+        { element: <One2BuyProductDetail />, caption: 'Product detail — the listing, related items, and a “Chat to Buy” action right at the point of transaction.' },
+        { element: <One2BuyChat />, caption: 'Chat to Buy — the peer-to-peer negotiation, opened with built-in safety guidance (meet in person, don’t wire money online).' },
+        { element: <One2BuyShop />, caption: 'Seller storefront — the “your shop” half of the value proposition: identity, followers, ratings, and the seller’s own listings.' },
+        { element: <One2BuyCreateAd />, caption: 'Post an Ad — the flow that turns any buyer into a seller: photos, category, price, and publish.' },
       ],
     },
   ],
