@@ -1,7 +1,9 @@
 /* ─────────────────────────────────────────────────────────
    One2Buy — Social Commerce Mobile App
-   Three pixel-faithful mini-UI recreations derived from the
-   Figma JSX source: Onboarding, Login, Product Detail
+   Pixel-faithful mini-UI recreations derived from the Figma
+   JSX source (no screen captures exist for this project):
+   Onboarding · Country/Language · Marketplace · Login · Product Detail.
+   These are vector/DOM, so they stay crisp when zoomed.
    ───────────────────────────────────────────────────────── */
 
 const R = '#ef4444';   // red-500 (brand accent)
@@ -14,22 +16,22 @@ function PhoneFrame({ children, dark }: { children: React.ReactNode; dark?: bool
   return (
     <div style={{
       width: '100%',
-      maxWidth: 160,
+      maxWidth: 200,
       margin: '0 auto',
       background: dark ? '#1c1917' : S,
-      borderRadius: 20,
+      borderRadius: 22,
       overflow: 'hidden',
       border: dark ? '2px solid #3f3f46' : '2px solid #e5e7eb',
       display: 'flex',
       flexDirection: 'column',
-      minHeight: 280,
+      minHeight: 360,
       position: 'relative',
     }}>
       {/* Status bar */}
-      <div style={{ height: 14, background: dark ? '#111' : '#fff', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 10px', flexShrink: 0 }}>
-        <span style={{ fontSize: 6, color: dark ? '#a1a1aa' : '#374151', fontWeight: 600 }}>9:41</span>
+      <div style={{ height: 18, background: dark ? '#111' : '#fff', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 12px', flexShrink: 0 }}>
+        <span style={{ fontSize: 8, color: dark ? '#a1a1aa' : '#374151', fontWeight: 600 }}>9:41</span>
         <div style={{ display: 'flex', gap: 3 }}>
-          {[5, 4, 3].map(w => <div key={w} style={{ width: w, height: 4, background: dark ? '#71717a' : '#374151', borderRadius: 1 }} />)}
+          {[6, 5, 4].map(w => <div key={w} style={{ width: w, height: 5, background: dark ? '#71717a' : '#374151', borderRadius: 1 }} />)}
         </div>
       </div>
       {children}
@@ -202,6 +204,103 @@ export function One2BuyProductDetail() {
         </div>
         <div style={{ background: R, borderRadius: 6, padding: '5px 12px' }}>
           <span style={{ fontSize: 8, fontWeight: 800, color: W }}>Chat to Buy</span>
+        </div>
+      </div>
+    </PhoneFrame>
+  );
+}
+
+/* ── SCREEN 4: Language & Country Select (localisation before entry) ── */
+export function One2BuyCountry() {
+  const countries = [
+    ['Saudi Arabia', '#16a34a'], ['UAE', '#0ea5e9'], ['Qatar', '#7c3aed'], ['Kuwait', '#16a34a'],
+    ['Bahrain', '#dc2626'], ['Oman', '#dc2626'], ['Iraq', '#0ea5e9'], ['Rest of World', '#71717a'],
+  ] as const;
+  return (
+    <PhoneFrame>
+      <div style={{ flex: 1, padding: '16px 14px', display: 'flex', flexDirection: 'column' }}>
+        {/* Language toggle */}
+        <div style={{ fontSize: 10, fontWeight: 800, color: '#1c1917', marginBottom: 6 }}>Choose your language</div>
+        <div style={{ display: 'flex', gap: 6, marginBottom: 16 }}>
+          {[['العربية', false], ['English', true]].map(([l, active]) => (
+            <div key={l as string} style={{ flex: 1, textAlign: 'center', borderRadius: 8, padding: '8px 0', background: active ? R : '#f4f4f5', border: `1px solid ${active ? R : '#e5e7eb'}` }}>
+              <span style={{ fontSize: 9, fontWeight: 700, color: active ? W : '#71717a' }}>{l}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Country select */}
+        <div style={{ fontSize: 10, fontWeight: 800, color: '#1c1917', marginBottom: 8 }}>Select Your Country</div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6 }}>
+          {countries.map(([name, dot], i) => (
+            <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 6, background: i === 0 ? '#fef2f2' : W, border: `1px solid ${i === 0 ? R : '#e5e7eb'}`, borderRadius: 8, padding: '7px 8px' }}>
+              <div style={{ width: 10, height: 10, borderRadius: '50%', background: dot, flexShrink: 0 }} />
+              <span style={{ fontSize: 8, fontWeight: 600, color: '#1c1917', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{name}</span>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ marginTop: 'auto', background: R, borderRadius: 30, padding: '10px 0', textAlign: 'center' }}>
+          <span style={{ fontSize: 9, fontWeight: 800, color: W }}>Continue</span>
+        </div>
+      </div>
+    </PhoneFrame>
+  );
+}
+
+/* ── SCREEN 5: Marketplace / Homepage browse ── */
+export function One2BuyMarketplace() {
+  const cats = ['Cars', 'Watercraft', 'Motorcycles'];
+  const items = [
+    ['Range Rover SUV Auto', '2017 · Petrol', 'AED 18,800'],
+    ['Suzuki Vitara', '2021 · Petrol', 'AED 3,800'],
+    ['YAMAHA RX100', 'Japan Model', 'AED 2,200'],
+  ];
+  return (
+    <PhoneFrame>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+        {/* Header + search */}
+        <div style={{ padding: '10px 12px 8px' }}>
+          <div style={{ fontSize: 12, fontWeight: 900, color: '#1c1917', marginBottom: 6 }}>Automotive</div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#f4f4f5', borderRadius: 20, padding: '6px 10px' }}>
+            <div style={{ width: 8, height: 8, borderRadius: '50%', border: '1.5px solid #a1a1aa' }} />
+            <span style={{ fontSize: 8, color: '#a1a1aa' }}>Search cars, parts, plates…</span>
+          </div>
+        </div>
+
+        {/* Category chips */}
+        <div style={{ display: 'flex', gap: 6, padding: '0 12px 8px' }}>
+          {cats.map((c, i) => (
+            <div key={c} style={{ padding: '4px 10px', borderRadius: 14, background: i === 0 ? R : '#f4f4f5', border: `1px solid ${i === 0 ? R : '#e5e7eb'}` }}>
+              <span style={{ fontSize: 7.5, fontWeight: 700, color: i === 0 ? W : '#71717a' }}>{c}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Listings */}
+        <div style={{ flex: 1, padding: '0 12px', display: 'flex', flexDirection: 'column', gap: 7, overflow: 'hidden' }}>
+          {items.map(([title, meta, price]) => (
+            <div key={title} style={{ display: 'flex', gap: 8, background: W, border: '1px solid #e5e7eb', borderRadius: 10, padding: 6 }}>
+              <div style={{ width: 42, height: 42, borderRadius: 8, background: 'linear-gradient(135deg,#f4f4f5,#e4e4e7)', flexShrink: 0 }} />
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: 8.5, fontWeight: 800, color: '#1c1917', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{title}</div>
+                <div style={{ fontSize: 7, color: '#71717a', marginBottom: 3 }}>{meta}</div>
+                <div style={{ fontSize: 8.5, fontWeight: 800, color: R }}>{price}</div>
+              </div>
+              <div style={{ width: 16, height: 16, borderRadius: '50%', border: '1px solid #e5e7eb', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <span style={{ fontSize: 8, color: R }}>♥</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom nav */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around', borderTop: '1px solid #e5e7eb', padding: '7px 0', flexShrink: 0 }}>
+          {['Home', 'Categories', '', 'Favorites', 'Profile'].map((l, i) => (
+            i === 2
+              ? <div key="sell" style={{ width: 26, height: 26, borderRadius: '50%', background: R, display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: -14, boxShadow: '0 2px 8px rgba(239,68,68,0.4)' }}><span style={{ fontSize: 12, color: W, fontWeight: 700 }}>+</span></div>
+              : <span key={l} style={{ fontSize: 7, fontWeight: i === 0 ? 800 : 500, color: i === 0 ? R : '#a1a1aa' }}>{l}</span>
+          ))}
         </div>
       </div>
     </PhoneFrame>

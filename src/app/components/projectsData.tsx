@@ -9,7 +9,7 @@
  */
 import { ReactNode } from 'react';
 import { Page } from '../App';
-import { One2BuyOnboarding, One2BuyLogin, One2BuyProductDetail } from './One2BuyMockups';
+import { One2BuyOnboarding, One2BuyCountry, One2BuyMarketplace, One2BuyLogin, One2BuyProductDetail } from './One2BuyMockups';
 import {
   QuickPayLanding, QuickPayOnboarding, QuickPayServices,
   KscHome, KscNewsIndex, KscArticle,
@@ -141,11 +141,13 @@ export const one2buyData: ProjectData = {
   galleries: [
     {
       label: 'The UI screens',
-      note: 'Where the strategy becomes visual — the buy/sell duality, localisation and trust, resolved on screen.',
+      note: 'Recreated from the Figma source — the buy/sell duality, localisation and trust, resolved on screen. Tap any screen to view it larger.',
       shots: [
-        { element: <One2BuyOnboarding />, caption: 'Onboarding — “Open Your Own Shop” or “Start Shopping”, the buy/sell duality stated up front' },
-        { element: <One2BuyLogin />, caption: 'Login — verification routed through WhatsApp, in the user’s chosen language' },
-        { element: <One2BuyProductDetail />, caption: 'Product detail — seller identity and safety guidance at the point of transaction' },
+        { element: <One2BuyOnboarding />, caption: 'Onboarding — the buy/sell duality stated up front: “Open Your Own Shop” or “Start Shopping”.' },
+        { element: <One2BuyCountry />, caption: 'Language & country — Arabic/English and seven GCC markets chosen before the first screen, so localisation is structural.' },
+        { element: <One2BuyMarketplace />, caption: 'Marketplace — category browse with search and a persistent bottom nav; “Sell” sits center-stage.' },
+        { element: <One2BuyLogin />, caption: 'Login — account verification routed through WhatsApp, in the user’s chosen language.' },
+        { element: <One2BuyProductDetail />, caption: 'Product detail — seller identity, related items and a “Chat to Buy” action at the point of transaction.' },
       ],
     },
   ],
