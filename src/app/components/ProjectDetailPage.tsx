@@ -22,40 +22,9 @@ function SectionLabel({ children }: { children: string }) {
   );
 }
 
-/** The amber flow arrow used between strategy → structure. */
-function FlowArrow() {
-  return (
-    <svg width="40" height="14" viewBox="0 0 40 14" style={{ flexShrink: 0, overflow: 'visible' }} aria-hidden="true">
-      <line x1="0" y1="7" x2="30" y2="7" stroke={T.amber} strokeWidth="1.5"
-        strokeDasharray="30" strokeDashoffset="30"
-        style={{ animation: 'proj-arrow 2.4s ease-in-out infinite' }} />
-      <polyline points="24,2 31,7 24,12" fill="none" stroke={T.amber} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
-        style={{ animation: 'proj-arrow-head 2.4s ease-in-out infinite' }} />
-    </svg>
-  );
-}
-
 export default function ProjectDetailPage({ data, onNavigate }: Props) {
   return (
     <div style={{ minHeight: '100vh', background: T.bg, fontFamily: T.sans }}>
-      <style>{`
-        @keyframes proj-arrow {
-          0%   { stroke-dashoffset: 30; opacity: 0.2; }
-          45%  { stroke-dashoffset: 0;  opacity: 1; }
-          80%  { stroke-dashoffset: 0;  opacity: 1; }
-          100% { stroke-dashoffset: 0;  opacity: 0.2; }
-        }
-        @keyframes proj-arrow-head {
-          0%, 30% { transform: translateX(-4px); opacity: 0; }
-          55%     { transform: translateX(0);   opacity: 1; }
-          80%     { transform: translateX(2px); opacity: 1; }
-          100%    { transform: translateX(2px); opacity: 0.2; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          [style*="proj-arrow"] { animation: none !important; }
-        }
-      `}</style>
-
       <div style={{ maxWidth: 1120, margin: '0 auto', padding: '48px 24px 96px' }}>
         {/* Back */}
         <button
@@ -99,18 +68,23 @@ export default function ProjectDetailPage({ data, onNavigate }: Props) {
           </div>
         </section>
 
-        {/* Strategy → Structure */}
+        {/* Challenge → Solution — kept high-level and scannable */}
         <section style={{ marginBottom: 72 }}>
-          <SectionLabel>The Business Strategy</SectionLabel>
-          <p style={{ fontSize: 18, color: '#C9CBC0', lineHeight: 1.8, marginBottom: 32, maxWidth: 860 }}>{data.strategy}</p>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 24 }}>
-            <FlowArrow />
-            <span style={{ fontFamily: T.serif, fontSize: 20, fontStyle: 'italic', color: T.amber }}>…and how it became structure</span>
-          </div>
-
-          <div style={{ background: T.bgCard, border: `1px solid ${T.line}`, borderRadius: 12, padding: '26px 28px' }}>
-            <p style={{ fontSize: 17.5, color: '#C9CBC0', lineHeight: 1.8 }}>{data.translation}</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
+            <div style={{ background: T.bgCard, border: `1px solid ${T.line}`, borderRadius: 14, padding: '26px 28px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
+                <HexMark size={11} />
+                <span style={{ fontFamily: T.sans, fontSize: 13, fontWeight: 500, color: T.amber, letterSpacing: '0.14em', textTransform: 'uppercase' }}>The Challenge</span>
+              </div>
+              <p style={{ fontSize: 16.5, color: '#C9CBC0', lineHeight: 1.75 }}>{data.strategy}</p>
+            </div>
+            <div style={{ background: T.bgCard, border: `1px solid ${T.mint}22`, borderRadius: 14, padding: '26px 28px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
+                <HexMark size={11} color={T.mint} />
+                <span style={{ fontFamily: T.sans, fontSize: 13, fontWeight: 500, color: T.mint, letterSpacing: '0.14em', textTransform: 'uppercase' }}>The Solution</span>
+              </div>
+              <p style={{ fontSize: 16.5, color: '#C9CBC0', lineHeight: 1.75 }}>{data.translation}</p>
+            </div>
           </div>
         </section>
 

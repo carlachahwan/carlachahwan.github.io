@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import HomePage from './components/HomePage';
@@ -10,6 +10,7 @@ import ProjectDetailPage from './components/ProjectDetailPage';
 import { baguetteData, totersData, hrResearchData } from './components/caseStudyData';
 import { octothinkData, one2buyData, azadeaData, quickPayData, kscData, wasmData } from './components/projectsData';
 import { tabForPage, TabKey } from './components/projectRegistry';
+import { initAnalytics, trackPageView, PAGE_META } from './utils/analytics';
 
 export type Page =
   | 'home' | 'projects' | 'contact'
@@ -27,6 +28,16 @@ const CASE_STUDY_PAGES: Page[] = [
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
   const [projectsTab, setProjectsTab] = useState<TabKey>('case-studies');
+
+  // Load GA4 once on mount.
+  useEffect(() => { initAnalytics(); }, []);
+
+  // Fire a virtual page view whenever the screen changes (covers the initial
+  // load and every in-app navigation, since this SPA never changes its URL).
+  useEffect(() => {
+    const meta = PAGE_META[currentPage];
+    if (meta) trackPageView(meta.path, meta.title);
+  }, [currentPage]);
 
   const handleNavigate = (page: Page) => {
     // Heading back to Projects from a project page? Open the tab that project

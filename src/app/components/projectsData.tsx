@@ -81,9 +81,9 @@ export const octothinkData: ProjectData = {
   overview:
     'A brain-training mobile app rebuilt around a clear engagement loop — from strategic concept, to wireframe, to a UI that makes progress and competition legible.',
   strategy:
-    'OctoThink’s value only compounds if people come back. The concept was therefore built around a repeatable engagement loop rather than a catalogue of games: pick your domains of interest, play, see measurable progress, and compare that progress against others. Every structural decision — domain selection at registration, a statistics view, and a leaderboard as a first-class destination — exists to serve that loop and give the business a retention engine instead of a one-off download.',
+    'OctoThink only compounds value if people come back — so it had to be a repeatable engagement loop, not just a catalogue of games.',
   translation:
-    'The loop was mapped as an information architecture first: Landing → Sign In / Registration → Choose Domains → Homepage → Games → Statistics → Leaderboard, with Profile, Settings and Notifications supporting it. The wireframes fixed that hierarchy in low fidelity — proving the flow before any visual decision. What follows traces the product’s progression over the years: the same architectural skeleton, carried from wireframe through the interface as it was, into the interface it became.',
+    'I mapped that loop as an information architecture — choose your domains, play, track progress, compete on the leaderboard — and carried the same skeleton from wireframe into the UI as it matured over the years.',
   galleries: [
     {
       label: 'Wireframes',
@@ -135,9 +135,9 @@ export const one2buyData: ProjectData = {
   overview:
     'A GCC marketplace positioned as “Your Shop & Shopping Partner” — a business strategy that turns every buyer into a potential seller, translated directly into the UI.',
   strategy:
-    'One2Buy’s strategy was to be more than a classifieds board: it positions itself as “Your Shop & Shopping Partner”, meaning every user is a potential merchant, not just a browser. That decision drives the whole product — the app must serve a first-time buyer and a small seller running a storefront with equal ease, across seven GCC markets, in both Arabic and English. Trust is the other half of the strategy: in a peer-to-peer market, a transaction only happens if both sides feel safe.',
+    'Positioned as “Your Shop & Shopping Partner”, One2Buy had to serve a first-time buyer and a small seller with equal ease — across seven GCC markets, in Arabic and English, where trust makes or breaks every peer-to-peer deal.',
   translation:
-    'The strategy became UI in three moves. First, the shop is a first-class object — Create Shop, View Shop, Edit Shop and Create Ad sit alongside browsing, so selling is never a hidden mode. Second, localisation is structural rather than cosmetic: language and country selection happen before the first screen, with Arabic and English as equals across seven markets. Third, trust is designed in — WhatsApp-based account verification, a visible seller profile with a join date, and explicit safety guidance ("check the condition of the item", "meet the seller in person", "don’t wire money online") placed at the point of transaction, not buried in a help centre.',
+    'Selling is a first-class flow (Create / View / Edit Shop), language and country are chosen before entry, and trust is built in — WhatsApp verification, a visible seller identity, and safety guidance right at the point of transaction.',
   galleries: [
     {
       label: 'The UI screens',
@@ -168,9 +168,9 @@ export const azadeaData: ProjectData = {
   overview:
     'A full heuristic audit of Azadea’s website and mobile app — every finding paired with a recommendation, then carried into the redesign.',
   strategy:
-    'For a fashion retailer, revenue lives in a single chain: find the product, understand it, trust it, buy it. The strategy here was not a visual refresh — it was to audit that chain end-to-end across both web and mobile, find every point where it breaks, and fix the breaks in priority order. The audit covered the Homepage, Header, Product List Page, Product Detail Page, Checkout, Banner and Footer, on desktop and responsive, with every problem paired to an actionable recommendation.',
+    'For a fashion retailer, revenue lives in one chain — find, understand, trust, buy. The goal wasn’t a visual refresh but to audit that chain end-to-end across web and mobile and fix every break in priority order.',
   translation:
-    'The audit produced concrete, buildable changes rather than opinions. On the PLP: the product counter moved next to the sub-category filter, Quick View and favourite demoted to icons so Add to Cart could own the CTA, and pagination introduced to end the endless scroll. On the PDP: the size guide given its own readable page, the share control made noticeable, and the overloaded layout reorganised. In checkout: the menu kept persistent and breadcrumbs added so users can find their way back. On mobile: action buttons (view, favourite, add to cart) surfaced under every product, filters moved above the listing, categories switched from carousel to grid, and font sizes raised for real-world readability.',
+    'Each finding became a concrete change: Add to Cart restored as the primary action, endless scroll replaced with pagination, the size guide made readable, navigation and breadcrumbs kept through checkout, and mobile readability raised.',
   galleries: [
     {
       label: 'Mobile app — after the audit',
@@ -212,9 +212,9 @@ export const quickPayData: ProjectData = {
   overview:
     'An SNB-powered remittance product for expatriate workers in Saudi Arabia — a strategy of removing onboarding friction, expressed structurally in the wireframe.',
   strategy:
-    'Quick Pay serves expatriate workers sending money home from Saudi Arabia — an audience underserved precisely because onboarding usually fails them. The strategic bet was to remove the two barriers that block that audience: identity friction and language. Verification runs through NAFATH with no Absher device authentication required, and the product speaks the languages its users actually speak — Bengali, Malayalam, Urdu, Hindi, Indonesian, Tagalog, Arabic and English among 9+ supported. The value proposition is stated plainly on the landing surface: transfer to the world within seconds, at competitive rates.',
+    'Quick Pay serves expatriate workers sending money home from Saudi Arabia — an audience usually failed by onboarding. The bet: remove the two barriers that block them, identity friction and language.',
   translation:
-    'The wireframe encodes that strategy rather than decorating it. Onboarding is compressed to three visible steps — enter ID and approve through NAFATH, enter personal details, start transferring — so the hardest part of the product is legible before a user commits. The live exchange-rate converter sits high on the page, answering the first question every remittance customer asks. The service architecture is laid out as distinct propositions (effortless account opening, multilingual experience, all-in-one financial services, global transfers to 210+ countries via Western Union, a 90-day grace period, easy local transfers, no Absher required) so each barrier removed is a benefit stated. Branches, tutorials and a contact structure close the loop for users who need a human.',
+    'Onboarding compresses to three legible steps via NAFATH (no Absher needed), the live exchange rate answers the first question up front, and 9+ languages plus 210-country reach are stated as plain benefits.',
   galleries: [
     {
       label: 'The wireframes',
@@ -246,9 +246,9 @@ export const kscData: ProjectData = {
   overview:
     'A city-development platform where the strategy is credibility — structured so a masterplan, its districts, and its story all lead to one action: register interest.',
   strategy:
-    'Khalid Bin Sultan City is a long-horizon development, which makes the business problem a trust problem: prospective buyers and investors commit to something that does not exist yet. The strategy was therefore to build credibility through structure — let people explore the city, its masterplan, its districts and its properties, back it with a living news-and-events narrative that proves momentum, and route every path toward a single conversion: register your interest. Serving the region properly also made Arabic a first-class requirement, not a translation layer.',
+    'A long-horizon city development is a trust problem — buyers commit to something that doesn’t exist yet. The strategy was to build credibility through structure and route every path to one action: register interest.',
   translation:
-    'The wireframe organises the platform into two cooperating systems. The first is the place itself — The City, Master Plan, Districts, Properties, The Developer — sequenced so a visitor moves from vision to specifics at their own pace. The second is proof: a News & Events architecture with category filtering, article and event detail templates, related-content surfacing, and a newsletter subscription that converts interest into an ongoing relationship. "Register your Interest" is carried persistently in the navigation so the conversion is always one click away, and the Arabic toggle sits in the same top-level position — bilingual by structure.',
+    'Two cooperating systems — the place (city → masterplan → districts → properties) and the proof (a filtered news & events narrative with newsletter capture) — with “Register your Interest” and Arabic held at top level throughout.',
   galleries: [
     {
       label: 'The wireframes',
@@ -280,9 +280,9 @@ export const wasmData: ProjectData = {
   overview:
     'An enterprise document-signing platform for Saudi organisations — where the strategy was to make a legally serious act feel safe, fast, and unambiguous on a phone.',
   strategy:
-    'WASM replaces the paper signature loop inside Saudi organisations, which makes the business problem one of trust and accountability rather than convenience alone: a signature is a legal act, so the product has to be as rigorous as the paperwork it removes while being faster than it. The strategy rested on three commitments. Identity is national, not proprietary — authentication runs through Nafath against Qiwa registration, so the person signing is verifiably who they claim to be. Urgency is explicit — documents carry Instant, Normal, Urgent and Very Urgent priorities, because in a real organisation not every signature is equal. And rejection is a first-class outcome — signing is never the only path, so the flow must let someone decline, with a reason, as easily as they approve.',
+    'A signature is a legal act, so an enterprise signing tool must be as rigorous as the paperwork it replaces — anchored on verifiable national identity, explicit urgency, and the right to decline.',
   translation:
-    'The wireframes turn those commitments into structure across two form factors. Authentication is a guided sequence rather than a form: enter your National ID / Iqama, approve in the Nafath app, with the waiting state explained rather than left to spin. Work is then organised by organisation — pending invitations, then Pending vs Completed document queues with search, sort and filtering by document number, department, title, priority and type, so a signatory can find one document among hundreds. The signing act itself is deliberately slowed and made explicit: pages are listed, then signed one at a time, with a confirmation per page and a clear step to move to the next — no bulk gesture that could sign something unread. Rejection carries a required comment (capped at 500 characters), and an Actions History preserves the audit trail. The iPad layout takes the same architecture and uses the extra canvas for document preview alongside the queue; the mobile layout stacks it.',
+    'Nafath authentication (against Qiwa), priority-tagged Pending/Completed queues with filtering, and deliberate page-by-page signing — no bulk gesture, rejection with a required reason, and a full audit trail — across mobile and iPad.',
   galleries: [
     {
       label: 'The wireframes',

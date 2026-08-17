@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Mail, MapPin, Linkedin, ArrowRight, CheckCircle, AlertCircle, Loader, MessageSquare, CalendarClock } from 'lucide-react';
 import { projectId, publicAnonKey } from '/utils/supabase/info';
 import { T, Eyebrow, HexMark, BgHex } from './playbook';
+import { trackEvent } from '../utils/analytics';
 
 const SERVER_URL = `https://${projectId}.supabase.co/functions/v1/make-server-101d0b25`;
 
@@ -76,6 +77,8 @@ function CalendlyEmbed() {
       const data = e.data;
       if (!data || typeof data.event !== 'string' || data.event.indexOf('calendly') !== 0) return;
       setLoaded(true);
+      // A completed booking is the key conversion — record it.
+      if (data.event === 'calendly.event_scheduled') trackEvent('calendly_booking');
       // Calendly reports its content height per step — resize the frame to fit,
       // ignoring the transient tiny values it emits mid-load.
       if (data.event === 'calendly.page_height' && data.payload && typeof data.payload.height === 'string') {
@@ -145,6 +148,7 @@ export default function ContactPage() {
       }
 
       setStatus('success');
+      trackEvent('contact_form_submit');
     } catch (err: any) {
       console.error('Contact form error:', err);
       setErrorMsg(err.message || 'Failed to send message. Please try again.');
