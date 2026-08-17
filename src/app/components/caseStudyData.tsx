@@ -183,7 +183,7 @@ export const telecomData: CaseStudyData = {
   accentColor: '#dc2626',
   accentBg: '#fef2f2',
   overview:
-    'A telecom brand asked whether to add digital services. We reframed it: could they become the connective tissue of daily digital life in Qatar? A zero-to-one engagement for a GCC telecom entering the super-app space — from competitive mapping and consumer research through to brand architecture and product strategy.',
+    'A telecom brand asked whether to add digital services. We reframed it: could they become the connective tissue of daily digital life in Qatar? A zero-to-one engagement — from market research through to brand and product strategy.',
 };
 
 export const baguetteData: CaseStudyData = {
@@ -196,9 +196,9 @@ export const baguetteData: CaseStudyData = {
   tags: ['React', 'SaaS', 'B2B', 'HR Tech', 'MENA'],
   accentColor: '#f59e0b',
   accentBg: '#fffbeb',
-  overview: 'Baguette is a business super-app for SMEs across the UAE and GCC. I was lead UX strategist on its Recruitment Module — a zero-to-one engagement spanning user research, information architecture, and wireframing through to high-fidelity UI and design system documentation.',
-  challenge: 'HR managers at SMEs ran their whole recruitment pipeline across 3–4 disconnected tools (LinkedIn, spreadsheets, email, WhatsApp) — causing data loss, inconsistent candidate communication, and zero visibility into funnel metrics.',
-  strategy: 'Dual-persona research (Sarah the HR Manager, Amir the Founder) mapped two divergent mental models. The unified architecture consolidated job posting, resume parsing, AI-ranking, interview scheduling, and analytics into one role-aware dashboard — kept simple for non-technical operators.',
+  overview: 'Baguette is a business super-app for SMEs across the UAE and GCC. I led UX strategy on its Recruitment Module — a zero-to-one engagement from research and information architecture through to high-fidelity UI.',
+  challenge: 'HR managers at SMEs ran recruitment across 3–4 disconnected tools (LinkedIn, spreadsheets, email, WhatsApp) — causing data loss and zero visibility into the hiring funnel.',
+  strategy: 'One role-aware dashboard consolidates posting, resume parsing, AI-ranking, scheduling and analytics — shaped by dual-persona research (an HR manager and a founder) and kept simple for non-technical operators.',
   techAlignment: "Component-first design on a stone/amber token system aligned to Baguette's brand, with annotated React handoff specs covering state mapping, permission-based visibility, and responsive breakpoints.",
   outcomes: [
     'Reduced average time-to-fill from 28 to 17 days in pilot testing',
@@ -225,9 +225,9 @@ export const totersData: CaseStudyData = {
   tags: ['Mobile', 'Delivery', 'Logistics', 'Lebanon', 'MENA', 'Multi-flow'],
   accentColor: '#16A34A',
   accentBg: '#f0fdf4',
-  overview: 'Toters is an on-demand delivery platform across Lebanon and MENA — users send packages or buy items for doorstep delivery by motorbike courier. I designed the full order-creation experience: service-type selection through a 4-step flow covering pickup, item spec, dropoff, and pricing.',
-  challenge: 'Fundamentally different tasks (package delivery vs. grocery shopping) shared one entry point, with no guidance on which flow to enter — driving high abandonment, incorrect form completions, and repeat support requests. The multi-step forms also lacked progress transparency, losing users mid-flow.',
-  strategy: 'A service-selection gate ("What do you need?") bifurcates the experience at Step 0, routing users into the right flow before any data entry. A persistent 4-dot step indicator runs across every screen, and contact/address fields pre-fill from the profile to cut repeat input.',
+  overview: 'Toters is an on-demand delivery platform across Lebanon and MENA. I designed the full order-creation experience — service selection through a 4-step flow covering pickup, items, dropoff and pricing.',
+  challenge: 'Two very different tasks — package delivery and grocery shopping — shared one entry point with no guidance, driving high abandonment, wrong-flow errors and repeat support requests.',
+  strategy: 'A service-selection gate ("What do you need?") splits the flow at Step 0, before any data entry. A persistent step indicator and profile-prefilled fields cut friction for repeat orders.',
   techAlignment: 'Component-annotated handoff on Inter with precise sizing tokens (13.02–19.53px), documenting state transitions for saved-address selection, the package-size radio group, and the item list. Green (#16A34A) mapped as primary action colour with contrast-compliant specs.',
   outcomes: [
     'Task abandonment reduced by 38% after service-gate screen introduction',
@@ -254,9 +254,9 @@ export const hrResearchData: CaseStudyData = {
   tags: ['UX Research', 'Market Analysis', 'Competitive Audit', 'HR Tech', 'KSA', 'MENA'],
   accentColor: '#4f46e5',
   accentBg: '#eef2ff',
-  overview: 'A confidential HR SaaS client (XName) engaged me for market and competitive research before committing to a redesign. The deliverable covered international and Gulf HR app analysis, feature categorisation across HR-department and employee dimensions, KSA compliance requirements, and a consolidated feature roadmap.',
-  challenge: 'The client was about to invest in a major redesign without knowing where their product stood — particularly against Gulf-native HR apps and international enterprise players. Without a structured audit, they risked rebuilding what they already had while missing gaps competitors had solved.',
-  strategy: "Four phases: (1) market scan of 8+ HR applications across international and Gulf markets, (2) common-feature extraction with HR Department vs Employee categorisation, (3) a competitive matrix mapping XName against each competitor, and (4) a prioritised feature set inclusive of KSA compliance (Nitaqat, GOSI, WPS, Saudization).",
+  overview: 'A confidential HR SaaS client engaged me for market and competitive research before a redesign — analysing international and Gulf HR apps and delivering a consolidated, KSA-compliant feature roadmap.',
+  challenge: 'The client was about to invest in a major redesign without knowing where their product stood against Gulf-native and international competitors — risking rebuilding what they had while missing real gaps.',
+  strategy: "A four-phase study: scan 8+ HR apps, extract common features (HR vs employee), map a competitive matrix, and deliver a prioritised feature set inclusive of KSA compliance (Nitaqat, GOSI, WPS, Saudization).",
   techAlignment: 'Research delivered as structured Figma boards for direct handoff to product and engineering. Recommendations were tagged by category and priority tier, mapping straight to sprint planning without further translation.',
   outcomes: [
     '8 HR applications systematically audited across international and Gulf markets',

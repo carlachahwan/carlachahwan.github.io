@@ -73,21 +73,26 @@ export default function CaseStudyPage({ data, onNavigate }: Props) {
           </div>
         </section>
 
-        {/* ── The Approach ── */}
+        {/* ── Challenge → Solution — high-level and scannable ── */}
         {(data.challenge || data.strategy) && (
           <section style={{ marginBottom: 72 }}>
-            <SectionLabel>The Approach</SectionLabel>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 16 }}>
               {data.challenge && (
-                <div style={{ background: T.bgCard, border: `1px solid ${T.line}`, borderRadius: 12, padding: 26 }}>
-                  <p style={{ fontFamily: T.sans, fontSize: 13, fontWeight: 500, color: T.amber, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 14 }}>The Challenge</p>
-                  <p style={{ fontSize: 16.5, color: T.sage, lineHeight: 1.75 }}>{data.challenge}</p>
+                <div style={{ background: T.bgCard, border: `1px solid ${T.line}`, borderRadius: 14, padding: '26px 28px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
+                    <HexMark size={11} />
+                    <span style={{ fontFamily: T.sans, fontSize: 13, fontWeight: 500, color: T.amber, letterSpacing: '0.14em', textTransform: 'uppercase' }}>The Challenge</span>
+                  </div>
+                  <p style={{ fontSize: 16.5, color: '#C9CBC0', lineHeight: 1.75 }}>{data.challenge}</p>
                 </div>
               )}
               {data.strategy && (
-                <div style={{ background: T.bgCard, border: `1px solid ${T.line}`, borderRadius: 12, padding: 26 }}>
-                  <p style={{ fontFamily: T.sans, fontSize: 13, fontWeight: 500, color: T.amber, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 14 }}>How I Helped</p>
-                  <p style={{ fontSize: 16.5, color: T.sage, lineHeight: 1.75 }}>{data.strategy}</p>
+                <div style={{ background: T.bgCard, border: `1px solid ${T.mint}22`, borderRadius: 14, padding: '26px 28px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
+                    <HexMark size={11} color={T.mint} />
+                    <span style={{ fontFamily: T.sans, fontSize: 13, fontWeight: 500, color: T.mint, letterSpacing: '0.14em', textTransform: 'uppercase' }}>The Solution</span>
+                  </div>
+                  <p style={{ fontSize: 16.5, color: '#C9CBC0', lineHeight: 1.75 }}>{data.strategy}</p>
                 </div>
               )}
             </div>
