@@ -16,9 +16,9 @@ export const T = {
   sage: '#8A9B8E',      // muted sage-grey text
   dim: '#696969',       // dimmer label
   faint: '#3A3D45',     // faintest text / struck-through
-  amber: '#E8963C',     // primary accent
-  amberDeep: '#cf7f28', // hover amber
-  gold: '#D8A24A',      // secondary warm accent
+  amber: '#4AE5BD',     // primary accent (mint green)
+  amberDeep: '#e0d9c3', // hover — deeper mint
+  gold: '#34D399',      // secondary accent — emerald green (distinct from primary mint)
   line: '#2A2C33',      // hairline / border
 
   /* Vibrant accents — used sparingly against the warm base so they read as
@@ -26,7 +26,7 @@ export const T = {
      cyan = interactive/live signals. Both sing on near-black. */
   mint: '#4AE5BD',
   cyan: '#22D3EE',
-  violet: '#A78BFA',
+  violet: '#e0d9c3',
 
   /* Typefaces: Roboto carries headings/titles, Inter carries body + UI. */
   display: "'Roboto', 'Helvetica Neue', sans-serif",

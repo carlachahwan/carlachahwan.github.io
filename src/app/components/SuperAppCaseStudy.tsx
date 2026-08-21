@@ -10,11 +10,10 @@ interface Props { onNavigate: (page: Page) => void; }
    Amber-dominant with warm/sage variety so the six chapters' finding cards
    stay distinguishable. DARK/MID are TEXT colours (cream / sage on near-black);
    LIGHT is the card surface. */
-const ACCENT      = '#E8963C';  // primary amber accent (brand)
-const ACCENT_DEEP = '#cf7f28';  // deeper amber
-const GOLD        = '#D8A24A';  // light gold
-const GREEN       = '#8A9B8E';  // sage
-const PURPLE      = '#A9905F';  // muted khaki
+const ACCENT      = '#4AE5BD';  // primary accent (mint green, brand)
+const ACCENT_DEEP = '#34ad92';  // deeper mint
+const GOLD        = '#34D399';  // secondary accent — emerald green (distinct from primary mint)
+const PURPLE      = '#e0d9c3';  // violet — third accent
 const DARK        = '#F4F1EA';  // cream — heading text
 const MID         = '#8A9B8E';  // sage — body text
 const LIGHT       = '#14151A';  // card surface
@@ -45,46 +44,36 @@ function Tag({ children, color = ACCENT }: { children: React.ReactNode; color?: 
   );
 }
 
-function Callout({ children, icon = '→' }: { children: React.ReactNode; icon?: string }) {
+/* Title-only pill — surfaces just the headline of a finding / theme / route
+   with all supporting detail stripped out, for a fast, skimmable read.
+   Items can carry an optional badge (e.g. the recommended brand route). */
+type PillItem = string | { label: string; badge?: string };
+function TitlePills({ items, color = ACCENT }: { items: PillItem[]; color?: string }) {
   return (
-    <div style={{ borderLeft: `3px solid ${ACCENT}`, margin: '24px 0', background: 'rgba(232,150,60,0.09)', padding: '14px 18px 14px 20px', borderRadius: '0 8px 8px 0' }}>
-      <span style={{ fontSize: 15, fontWeight: 700, color: ACCENT, marginRight: 6 }}>{icon}</span>
-      <span style={{ fontSize: 17, fontWeight: 500, color: DARK, lineHeight: 1.6 }}>{children}</span>
-    </div>
-  );
-}
-
-function StatCard({ value, label, sub }: { value: string; label: string; sub?: string }) {
-  return (
-    <div style={{ background: '#14151A', border: '1px solid #2A2C33', borderRadius: 12, padding: '20px 18px', textAlign: 'center' }}>
-      <div style={{ fontSize: 34, fontWeight: 900, color: DARK, lineHeight: 1, letterSpacing: '-0.03em' }}>{value}</div>
-      <div style={{ fontSize: 14, fontWeight: 700, color: ACCENT, marginTop: 4 }}>{label}</div>
-      {sub && <div style={{ fontSize: 13, color: MID, marginTop: 3, lineHeight: 1.4 }}>{sub}</div>}
-    </div>
-  );
-}
-
-/* Finding → UX Implication card. Mirrors the source board pattern where every
-   research finding carries an explicit design consequence. */
-function FindingCard({ icon, title, points, implication, color = ACCENT }: {
-  icon: string; title: string; points: string[]; implication: string; color?: string;
-}) {
-  return (
-    <div style={{ background: '#14151A', border: `1px solid ${color}33`, borderRadius: 12, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ padding: '16px 16px 12px' }}>
-        <div style={{ fontSize: 22, marginBottom: 8 }}>{icon}</div>
-        <div style={{ fontSize: 15, fontWeight: 800, color, textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: 8 }}>{title}</div>
-        {points.map(p => (
-          <div key={p} style={{ display: 'flex', gap: 7, alignItems: 'flex-start', marginBottom: 5 }}>
-            <span style={{ color, fontSize: 12, marginTop: 4, flexShrink: 0 }}>●</span>
-            <span style={{ fontSize: 14.5, color: MID, lineHeight: 1.55 }}>{p}</span>
+    <div style={autoGrid(200)}>
+      {items.map(it => {
+        const label = typeof it === 'string' ? it : it.label;
+        const badge = typeof it === 'string' ? undefined : it.badge;
+        return (
+          <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#14151A', border: `1px solid ${color}33`, borderRadius: 10, padding: '14px 16px' }}>
+            <svg width="10" height="10" viewBox="0 0 10 10" style={{ flexShrink: 0 }} aria-hidden="true">
+              <polygon points="5,0.5 9.33,3 9.33,7.5 5,10 0.67,7.5 0.67,3" fill={color} />
+            </svg>
+            <span style={{ fontSize: 15, fontWeight: 700, color: DARK, lineHeight: 1.3 }}>{label}</span>
+            {badge && <span style={{ marginLeft: 'auto', fontSize: 10, fontWeight: 800, color: '#14151A', background: color, padding: '2px 8px', borderRadius: 20, letterSpacing: '0.06em', flexShrink: 0 }}>{badge}</span>}
           </div>
-        ))}
-      </div>
-      <div style={{ marginTop: 'auto', background: `${color}0d`, borderTop: `1px solid ${color}22`, padding: '10px 16px' }}>
-        <span style={{ fontSize: 12, fontWeight: 800, color, textTransform: 'uppercase', letterSpacing: '0.06em', marginRight: 6 }}>UX Implication</span>
-        <span style={{ fontSize: 14, color: MID, lineHeight: 1.5 }}>{implication}</span>
-      </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/* One- or two-sentence synthesis that closes a group of titles — the "so what"
+   under the headlines. */
+function GroupTakeaway({ children, color = ACCENT }: { children: React.ReactNode; color?: string }) {
+  return (
+    <div style={{ margin: '14px 0 4px', borderLeft: `3px solid ${color}`, padding: '2px 0 2px 16px' }}>
+      <span style={{ fontSize: 16.5, color: DARK, lineHeight: 1.65 }}>{children}</span>
     </div>
   );
 }
@@ -135,7 +124,7 @@ function Chapter({ id, num, label, takeaway, open, onToggle, innerRef, children 
           <svg width="11" height="11" viewBox="0 0 10 10" style={{ flexShrink: 0 }} aria-hidden="true">
             <polygon points="5,0.5 9.33,3 9.33,7.5 5,10 0.67,7.5 0.67,3" fill={ACCENT} />
           </svg>
-          <span style={{ fontSize: 13, fontWeight: 500, color: ACCENT, letterSpacing: '0.14em' }}>CHAPTER {num}</span>
+          <span style={{ fontSize: 13, fontWeight: 500, color: ACCENT, letterSpacing: '0.14em' }}>STEP {num}</span>
           <div style={{ flex: 1, height: 1, background: '#2A2C33' }} />
           <ChevronDown size={20} color={open ? ACCENT : MID} style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease', flexShrink: 0 }} />
         </div>
@@ -162,440 +151,122 @@ function Body({ children }: { children: React.ReactNode }) {
 
 /* ─────────────────────────── Chapter visuals ─────────────────────────── */
 
-/* CH1 — mirrors the two source boards: Market Analysis (5 findings) and
-   Opportunity Sizing (3 opportunities), each with a UX Implication footer. */
+/* STEP 1 — Qatar market analysis and opportunity sizing, reduced to headline
+   findings with a synthesis line under each group. */
 function Ch1Visual() {
   const findings = [
-    {
-      icon: '📱', title: 'Digital-Savvy Population', color: ACCENT,
-      points: ['~99% smartphone penetration', '~99% internet penetration', 'High digital literacy; early adopters of new tech'],
-      implication: 'Users expect seamless, intuitive experiences — low tolerance for heavy or dated UIs.',
-    },
-    {
-      icon: '💎', title: 'Affluent & Spending Power', color: GOLD,
-      points: ['High GDP per capita', 'High disposable income; willingness to pay for convenience and premium services'],
-      implication: 'Focus on value-added services, frictionless payment, and tiered/premium features.',
-    },
-    {
-      icon: '🌍', title: 'Diverse & Mobile Population', color: PURPLE,
-      points: ['Large expatriate base reliant on digital tools, often sending remittances', 'Young demographic, frequent users of digital services'],
-      implication: 'Multi-language support (Arabic and English critical; consider Hindi, Tagalog) plus robust international payments and remittances.',
-    },
-    {
-      icon: '🏛️', title: 'Government Digitalization (QNV 2030)', color: ACCENT_DEEP,
-      points: ['"Digitally advanced society" agenda; favorable regulatory environment', 'Government push toward smart cities, e-health, and digital education'],
-      implication: 'Design for Hukoomi deep-linking and e-government integration; data security and compliance for citizen services.',
-    },
-    {
-      icon: '⚡', title: 'World-Class Infrastructure', color: GREEN,
-      points: ['5G and fiber enable fast, reliable app performance and rich media content'],
-      implication: 'Can support complex features: real-time delivery and transport tracking, video support calls.',
-    },
+    'Digital-Savvy Population',
+    'Affluent & Spending Power',
+    'Diverse & Mobile Population',
+    'Government Digitalization (QNV 2030)',
+    'World-Class Infrastructure',
   ];
-
   const opportunities = [
-    {
-      icon: '🧩', title: 'Fragmented Digital Ecosystem', color: ACCENT,
-      points: ['Users juggle 5–10+ apps for daily needs — food, transport, banking, government, shopping'],
-      implication: 'The primary value proposition is consolidation and reduced app fatigue.',
-    },
-    {
-      icon: '💳', title: 'Untapped Payment Consolidation', color: GOLD,
-      points: ['No truly neutral, widely accepted cross-service wallet dominates outside specific apps', 'Cash on delivery still common in some sectors — an opportunity to shift behavior'],
-      implication: 'Prioritize a secure, easy digital wallet (QR, NFC, card linking); emphasize speed and convenience over cash.',
-    },
-    {
-      icon: '🏪', title: 'Niche E-commerce & Local Services', color: PURPLE,
-      points: ['Local artisanal goods, specialized home services, and event bookings are fragmented or under-served', 'Potential for a "local marketplace" catering to Qatar\'s community needs (Phase 3)'],
-      implication: 'Build a trusted platform for small businesses, local discovery, and review systems.',
-    },
+    'Fragmented Digital Ecosystem',
+    'Untapped Payment Consolidation',
+    'Niche E-commerce & Local Services',
   ];
 
   return (
     <div style={{ margin: '28px 0' }}>
       <BoardLabel>Qatar Market Analysis — five findings</BoardLabel>
-      {/* 3 on the first row, 2 on the second (lg); cards stretch to equal
-          height per row and each card's UX Implication footer sits at the
-          bottom, so the footers line up across the row. */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        {findings.map(f => <FindingCard key={f.title} {...f} />)}
-      </div>
-      <BoardLabel color={GOLD}>Qatar Opportunity Sizing — three white spaces</BoardLabel>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        {opportunities.map(o => <FindingCard key={o.title} {...o} />)}
-      </div>
+      <TitlePills items={findings} />
+      <GroupTakeaway>A high digital readiness doesn't mean users want more apps; it means they're ready for a better one.</GroupTakeaway>
+
+      <BoardLabel color={GOLD}>Qatar Opportunity Sizing — three findings</BoardLabel>
+      <TitlePills items={opportunities} color={GOLD} />
+      <GroupTakeaway color={GOLD}>None of these gaps is a missing app — it's a missing connection. The opening is the trusted, wallet-led layer that ties fragmented services into one daily habit.</GroupTakeaway>
     </div>
   );
 }
 
-/* CH2 — direct competitors with strengths/gaps, indirect tier, and the
-   feature-coverage matrix that evidences the white-space claim. */
+/* STEP 2 — two tiers studied for what to learn: direct competitors for the
+   strengths to match and weaknesses to design out, indirect competitors for
+   the single best feature worth borrowing into the super app. */
 function Ch2Visual() {
-  const direct = [
-    {
-      name: 'Snoonu', tag: 'Qatar — homegrown super app', color: ACCENT,
-      strengths: ['Strong local brand and logistics', 'Broad catalog: food, grocery, pharmacy, e-commerce, courier'],
-      gaps: ['Breadth outpaces depth — discovery and IA strain as categories grow'],
-    },
-    {
-      name: 'Talabat', tag: 'Regional — food & q-commerce', color: ACCENT_DEEP,
-      strengths: ['Regional scale and refined ordering UX', 'Established loyalty mechanics'],
-      gaps: ['Category-limited: food and grocery centric, not a lifestyle platform'],
-    },
-    {
-      name: 'Rafeeq', tag: 'Qatar — local delivery', color: GOLD,
-      strengths: ['Local niches competitors ignore (e.g. water, gas, errands)'],
-      gaps: ['Smaller scale; utilitarian UX; confined to delivery verticals'],
-    },
-    {
-      name: 'Careem', tag: 'MENA — super app blueprint', color: PURPLE,
-      strengths: ['Proven rides→super-app playbook; Careem Pay wallet'],
-      gaps: ['Qatar footprint thinner than core UAE market; localization gaps'],
-    },
-  ];
-
-  const indirect = [
-    { icon: '🏦', label: 'Banking apps', desc: 'Own payments trust but not lifestyle frequency' },
-    { icon: '🏛️', label: 'Government apps', desc: 'Metrash2, Hukoomi — essential but single-purpose' },
-    { icon: '📶', label: 'Telecom self-care', desc: 'High install base, low emotional engagement' },
-    { icon: '🌐', label: 'International platforms', desc: 'Global commerce and messaging, weak local integration' },
-  ];
-
-  const features = ['Food delivery', 'Grocery / q-commerce', 'Ride-hailing', 'Payments / wallet', 'Government services', 'Telecom services', 'Local marketplace'];
-  //           Snoonu  Talabat  Rafeeq  Careem   (● full, ◐ partial, — none)
-  const matrix: Record<string, string[]> = {
-    'Food delivery':        ['●', '●', '●', '◐'],
-    'Grocery / q-commerce': ['●', '●', '◐', '◐'],
-    'Ride-hailing':         ['—', '—', '—', '●'],
-    'Payments / wallet':    ['◐', '◐', '—', '◐'],
-    'Government services':  ['—', '—', '—', '—'],
-    'Telecom services':     ['—', '—', '—', '—'],
-    'Local marketplace':    ['◐', '—', '—', '—'],
-  };
-  const players = ['Snoonu', 'Talabat', 'Rafeeq', 'Careem'];
+  const direct = ['Snoonu', 'Talabat', 'Rafeeq', 'Careem'];
+  const indirect = ['Banking apps', 'Government apps', 'Telecom self-care', 'International platforms'];
 
   return (
     <div style={{ margin: '28px 0' }}>
-      <BoardLabel>Direct competitors — vertical owners</BoardLabel>
-      <div style={autoGrid(240)}>
-        {direct.map(({ name, tag, color, strengths, gaps }) => (
-          <div key={name} style={{ background: '#14151A', border: `1px solid ${color}33`, borderRadius: 12, overflow: 'hidden' }}>
-            <div style={{ background: color, padding: '10px 14px' }}>
-              <div style={{ fontSize: 16, fontWeight: 800, color: '#14151A' }}>{name}</div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#F4F1EAcc', letterSpacing: '0.04em' }}>{tag}</div>
-            </div>
-            <div style={{ padding: '12px 14px', display: 'flex', flexDirection: 'column', gap: 5 }}>
-              {strengths.map(s => (
-                <div key={s} style={{ display: 'flex', gap: 6, alignItems: 'flex-start' }}>
-                  <span style={{ color: GREEN, fontSize: 12, marginTop: 3, flexShrink: 0 }}>✓</span>
-                  <span style={{ fontSize: 14, color: MID, lineHeight: 1.5 }}>{s}</span>
-                </div>
-              ))}
-              {gaps.map(g => (
-                <div key={g} style={{ display: 'flex', gap: 6, alignItems: 'flex-start' }}>
-                  <span style={{ color: '#ef4444', fontSize: 12, marginTop: 3, flexShrink: 0 }}>✗</span>
-                  <span style={{ fontSize: 14, color: MID, lineHeight: 1.5 }}>{g}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
+      <BoardLabel>Direct competitors — strengths to match, gaps to design out</BoardLabel>
+      <TitlePills items={direct} />
+      <GroupTakeaway>Each leads a vertical worth learning from — Snoonu's local logistics and breadth, Talabat's polished ordering and loyalty, Rafeeq's grip on hyper-local errands, Careem's rides-to-wallet playbook — and each reveals a gap to avoid: strength in one category rarely carried the depth or lifestyle breadth a super app needs.</GroupTakeaway>
 
-      <BoardLabel color={PURPLE}>Indirect competitors — trust and attention holders</BoardLabel>
-      <div style={autoGrid(180)}>
-        {indirect.map(({ icon, label, desc }) => (
-          <div key={label} style={{ background: '#14151A', border: '1px solid #2A2C33', borderRadius: 12, padding: '14px 16px' }}>
-            <div style={{ fontSize: 22, marginBottom: 6 }}>{icon}</div>
-            <div style={{ fontSize: 14, fontWeight: 800, color: DARK, marginBottom: 4 }}>{label}</div>
-            <div style={{ fontSize: 13.5, color: MID, lineHeight: 1.55 }}>{desc}</div>
-          </div>
-        ))}
-      </div>
-
-      <BoardLabel color={ACCENT_DEEP}>Feature coverage — where the white space lives</BoardLabel>
-      <div style={{ background: '#14151A', border: '1px solid #2A2C33', borderRadius: 12, overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 480 }}>
-          <thead>
-            <tr>
-              <th style={{ textAlign: 'left', padding: '10px 14px', fontSize: 13, fontWeight: 800, color: DARK, borderBottom: '2px solid #2A2C33' }}>Capability</th>
-              {players.map(p => (
-                <th key={p} style={{ padding: '10px 8px', fontSize: 13, fontWeight: 800, color: DARK, borderBottom: '2px solid #2A2C33', textAlign: 'center' }}>{p}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {features.map(f => {
-              const whiteSpace = matrix[f].every(v => v !== '●');
-              return (
-                <tr key={f} style={{ background: whiteSpace ? `${GOLD}10` : 'transparent' }}>
-                  <td style={{ padding: '8px 14px', fontSize: 14, fontWeight: whiteSpace ? 800 : 600, color: whiteSpace ? ACCENT : DARK, borderBottom: '1px solid #2A2C33' }}>
-                    {f}{whiteSpace && <span style={{ marginLeft: 6, fontSize: 11, fontWeight: 800, color: GOLD, letterSpacing: '0.05em' }}>WHITE SPACE</span>}
-                  </td>
-                  {matrix[f].map((v, i) => (
-                    <td key={i} style={{ padding: '8px', textAlign: 'center', fontSize: 15, color: v === '●' ? GREEN : v === '◐' ? GOLD : '#3A3D45', borderBottom: '1px solid #2A2C33' }}>{v}</td>
-                  ))}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <div style={{ padding: '8px 14px', fontSize: 12, color: '#696969', borderTop: '1px solid #2A2C33' }}>
-          ● full coverage &nbsp;·&nbsp; ◐ partial &nbsp;·&nbsp; — absent
-        </div>
-      </div>
-
-      <div style={{ marginTop: 16, background: `${GOLD}12`, border: `2px dashed ${GOLD}`, borderRadius: 12, padding: '16px 20px', textAlign: 'center' }}>
-        <div style={{ fontSize: 15, fontWeight: 800, color: ACCENT, marginBottom: 4 }}>THE KEY INSIGHT</div>
-        <div style={{ fontSize: 17, color: ACCENT, lineHeight: 1.6 }}>
-          Every player owns <strong>one vertical</strong>. None owns the <strong>connective tissue</strong> between them —
-          and no one integrates payments, government, and telecom into daily life. That gap is the strategic entry point.
-        </div>
-      </div>
+      <BoardLabel color={PURPLE}>Indirect competitors — best features worth borrowing</BoardLabel>
+      <TitlePills items={indirect} color={PURPLE} />
+      <GroupTakeaway color={PURPLE}>None competes for the whole day, but each does one thing worth taking into the super app: banking apps' payment trust and security, government apps' essential service integration (Metrash2, Hukoomi), telecom self-care's massive install base, and international platforms' commerce and messaging polish.</GroupTakeaway>
     </div>
   );
 }
 
-/* CH3 — key numbers, behavioral drivers (synthesized insights, not verbatims),
-   and the "What this Means" business/product split from the source board. */
+/* STEP 3 — the behavioral drivers behind adoption, stripped to their headlines. */
 function Ch3Visual() {
-  const drivers = [
-    { theme: '🛡️ Trust decides adoption', insight: 'People avoid platforms that feel complicated, unsafe, or unclear in value. Trust strongly influences whether they adopt at all.' },
-    { theme: '⚡ Convenience beats price', insight: 'The hierarchy is convenience > price > brand loyalty. Users prioritize effortless journeys and time savings.' },
-    { theme: '😤 Complexity is emotional', insight: 'Users dislike complexity. They want guided flows, transparency, personalization, and reassurance at every risky step.' },
-  ];
+  const drivers = ['Trust decides adoption', 'Convenience beats price', 'Complexity is emotional'];
 
   return (
-    <div style={{ margin: '28px 0', display: 'flex', flexDirection: 'column', gap: 14 }}>
-      <div style={autoGrid(150)}>
-        <StatCard value="80%+" label="Prefer Digital" sub="prefer managing essential services digitally" />
-        <StatCard value="60–70%" label="Onboarding Drop-off" sub="abandon during long or confusing onboarding flows" />
-        <StatCard value="25–35%" label="Trust Lifts Completion" sub="completion lift from trust & security reassurance" />
-        <StatCard value="3×" label="Simplicity Retains" sub="more likely to stay when the experience feels simple and reliable" />
-        <StatCard value="70%+" label="Returning User Value" sub="of platform value comes from returning users" />
-      </div>
-
-      <div style={{ background: '#14151A', border: `1px solid ${ACCENT}33`, borderRadius: 12, padding: '16px 20px' }}>
-        <div style={{ fontSize: 13, fontWeight: 800, color: ACCENT, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>Behavioral Drivers</div>
-        <div style={autoGrid(190)}>
-          {drivers.map(({ theme, insight }) => (
-            <div key={theme} style={{ background: LIGHT, borderRadius: 8, padding: '12px 14px' }}>
-              <div style={{ fontSize: 14, fontWeight: 800, color: ACCENT, marginBottom: 6 }}>{theme}</div>
-              <div style={{ fontSize: 14, color: MID, lineHeight: 1.6 }}>{insight}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* "What this Means?" board — the research-to-principle bridge */}
-      <div style={autoGrid(280)}>
-        <div style={{ background: '#14151A', border: '1px solid #fecaca', borderRadius: 12, padding: '16px 18px' }}>
-          <div style={{ fontSize: 13, fontWeight: 800, color: ACCENT_DEEP, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>For the Business</div>
-          <div style={{ fontSize: 15, color: MID, lineHeight: 1.7 }}>
-            The opportunity is to lead through <strong>experience excellence, not just availability</strong> — and that
-            demands investment in trust, clarity, and unified journeys to win long-term adoption.
-          </div>
-        </div>
-        <div style={{ background: '#14151A', border: `1px solid ${PURPLE}33`, borderRadius: 12, padding: '16px 18px' }}>
-          <div style={{ fontSize: 13, fontWeight: 800, color: PURPLE, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>For UX & Product</div>
-          {[
-            ['Reduce friction', 'simplify onboarding and navigation'],
-            ['Build confidence', 'highlight reassurance, transparency, and guidance'],
-            ['Personalize', 'help users feel the platform understands them'],
-          ].map(([k, v]) => (
-            <div key={k} style={{ display: 'flex', gap: 8, alignItems: 'flex-start', marginBottom: 6 }}>
-              <span style={{ color: PURPLE, fontSize: 13, marginTop: 3, flexShrink: 0 }}>→</span>
-              <span style={{ fontSize: 15, color: MID, lineHeight: 1.6 }}><strong style={{ color: DARK }}>{k}</strong> — {v}</span>
-            </div>
-          ))}
-        </div>
-      </div>
+    <div style={{ margin: '28px 0' }}>
+      <BoardLabel>Behavioral drivers</BoardLabel>
+      <TitlePills items={drivers} />
+      <GroupTakeaway>Users don't want more features — they want confidence the app won't waste their time. Retention, not acquisition, is won by removing friction and signalling trust at every risky step.</GroupTakeaway>
     </div>
   );
 }
 
-/* CH4 — per-platform benchmarks first (the comparanda), then the extracted
-   patterns and the anti-pattern. */
+/* STEP 4 — global benchmarks and the durable patterns they share. */
 function Ch4Visual() {
-  const benchmarks = [
-    { flag: '🇨🇳', name: 'WeChat', region: 'China', hero: 'Messaging', lesson: 'Became a daily operating system: payments as the glue, mini-programs as the ecosystem. Habit first, everything else second.' },
-    { flag: '🇸🇬', name: 'Grab', region: 'Southeast Asia', hero: 'Ride-hailing', lesson: 'Won one hero use-case, then layered food, deliveries, and GrabPay onto an existing daily behavior.' },
-    { flag: '🇦🇪', name: 'Careem', region: 'MENA', hero: 'Rides', lesson: 'Localization as strategy — cash options, regional payment realities, Arabic-first flows — proved super apps must adapt, not copy.' },
-    { flag: '🇨🇴', name: 'Rappi', region: 'Latin America', hero: 'Delivery', lesson: 'Made complex logistics invisible to users; expanded into an "everything app" while keeping the front stage simple.' },
-  ];
-
-  const patterns = [
-    { icon: '🦸', title: 'Hero-First Expansion', desc: 'Lead with one killer use-case. Win trust. Expand from there. Grab started with rides. WeChat with messaging.' },
-    { icon: '✂️', title: 'Simplicity at Scale', desc: "The apps with the most features aren't the most used. Rappi succeeded by making complex logistics feel invisible to users." },
-    { icon: '🛡️', title: 'Designed Trust', desc: 'Payments, data permissions, and support flows are trust infrastructure. Users sense when safety is designed in vs. bolted on.' },
-    { icon: '💳', title: 'Payments Drive Adoption', desc: 'Every durable super app built a wallet first. Payments create daily utility, which creates habit, which creates lock-in.' },
-  ];
+  const benchmarks = ['WeChat', 'Grab', 'Careem', 'Rappi'];
+  const patterns = ['Hero-First Expansion', 'Simplicity at Scale', 'Designed Trust', 'Payments Drive Adoption'];
 
   return (
-    <div style={{ margin: '28px 0', display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={autoGrid(230)}>
-        {benchmarks.map(({ flag, name, region, hero, lesson }) => (
-          <div key={name} style={{ background: '#14151A', border: '1px solid #2A2C33', borderRadius: 12, padding: '14px 16px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-              <span style={{ fontSize: 22 }}>{flag}</span>
-              <div>
-                <div style={{ fontSize: 15, fontWeight: 800, color: DARK }}>{name}</div>
-                <div style={{ fontSize: 12, color: '#696969', fontWeight: 600 }}>{region} · hero: {hero}</div>
-              </div>
-            </div>
-            <div style={{ fontSize: 14, color: MID, lineHeight: 1.6 }}>{lesson}</div>
-          </div>
-        ))}
-      </div>
+    <div style={{ margin: '28px 0' }}>
+      <BoardLabel>Global benchmarks</BoardLabel>
+      <TitlePills items={benchmarks} />
 
-      <BoardLabel>Four durable patterns</BoardLabel>
-      <div style={autoGrid(240)}>
-        {patterns.map(({ icon, title, desc }) => (
-          <div key={title} style={{ background: '#14151A', border: '1px solid #2A2C33', borderRadius: 12, padding: '16px 18px' }}>
-            <div style={{ fontSize: 26, marginBottom: 8 }}>{icon}</div>
-            <div style={{ fontSize: 15, fontWeight: 800, color: DARK, marginBottom: 6 }}>{title}</div>
-            <div style={{ fontSize: 14, color: MID, lineHeight: 1.6 }}>{desc}</div>
-          </div>
-        ))}
-      </div>
+      <BoardLabel color={ACCENT_DEEP}>Four durable patterns</BoardLabel>
+      <TitlePills items={patterns} color={ACCENT_DEEP} />
 
-      <div style={{ background: 'rgba(248,113,113,0.08)', border: '1px solid rgba(248,113,113,0.4)', borderRadius: 12, padding: '14px 18px', display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-        <div style={{ fontSize: 24, flexShrink: 0 }}>⚠️</div>
-        <div>
-          <div style={{ fontSize: 14, fontWeight: 800, color: '#f87171', marginBottom: 4, letterSpacing: '0.02em' }}>THE ANTI-PATTERN: Feature Dumping</div>
-          <div style={{ fontSize: 15, color: '#EBBEBE', lineHeight: 1.6 }}>
-            Apps that launch with 20 features to compete immediately create cognitive overload, dilute their brand proposition,
-            and fail to build the trust required for users to return. More features ≠ more value.
-          </div>
-        </div>
-      </div>
+      <GroupTakeaway>One great thing first, many things later. Every durable super app earned the habit — usually through payments — before it expanded; the ones that launched with everything drowned in their own features.</GroupTakeaway>
     </div>
   );
 }
 
-/* CH5 — five strategic themes plus the phased build sequence that turns
-   themes into a roadmap. */
+/* STEP 5 — strategic themes sequenced into a phased build. */
 function Ch5Visual() {
-  const themes = [
-    { num: '01', icon: '🔗', title: 'Radical Integration', color: ACCENT, desc: 'Connect services users currently switch between: telecom, food, mobility, payments, government.' },
-    { num: '02', icon: '💳', title: 'Trusted Wallet Layer', color: ACCENT_DEEP, desc: 'A telecom-backed digital wallet carries inherited trust. This is the unfair advantage no pure-play startup has.' },
-    { num: '03', icon: '☀️', title: 'Daily Utility Hook', color: GREEN, desc: 'Own a high-frequency daily behavior (bill pay, top-up, transit) to build the habit that brings users back.' },
-    { num: '04', icon: '🎯', title: 'Smart Personalization', color: PURPLE, desc: 'Use telecom data (location, usage, demographics) responsibly to surface relevant services at the right moment.' },
-    { num: '05', icon: '✨', title: 'Experience as Strategy', color: GOLD, desc: 'In a market where competitors are functional, a beautifully designed experience is a competitive moat, not a nice-to-have.' },
-  ];
-
-  const phases = [
-    { phase: 'Phase 1', title: 'Earn the habit', color: ACCENT, items: 'Hero services + telecom core (bills, top-up), onboarding excellence, trust signals from day one.' },
-    { phase: 'Phase 2', title: 'Own the wallet', color: ACCENT_DEEP, items: 'Unified wallet (QR, NFC, card linking), daily utility expansion, e-government integration via Hukoomi.' },
-    { phase: 'Phase 3', title: 'Open the ecosystem', color: PURPLE, items: 'Local marketplace for small businesses, partner services, personalization at scale.' },
-  ];
+  const themes = ['Radical Integration', 'Trusted Wallet Layer', 'Daily Utility Hook', 'Smart Personalization', 'Experience as Strategy'];
+  const phases = ['Phase 1 — Earn the habit', 'Phase 2 — Own the wallet', 'Phase 3 — Open the ecosystem'];
 
   return (
-    <div style={{ margin: '28px 0', display: 'flex', flexDirection: 'column', gap: 8 }}>
-      {themes.map(({ num, icon, title, color, desc }) => (
-        <div key={num} style={{ background: '#14151A', border: `1px solid ${color}33`, borderRadius: 12, padding: '14px 18px', display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-          <div style={{ width: 36, height: 36, background: `${color}18`, borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, flexShrink: 0 }}>
-            {icon}
-          </div>
-          <div style={{ flex: 1 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-              <span style={{ fontSize: 11, fontWeight: 800, color, letterSpacing: '0.1em' }}>{num}</span>
-              <span style={{ fontSize: 16, fontWeight: 800, color: DARK }}>{title}</span>
-            </div>
-            <div style={{ fontSize: 15, color: MID, lineHeight: 1.6 }}>{desc}</div>
-          </div>
-        </div>
-      ))}
+    <div style={{ margin: '28px 0' }}>
+      <BoardLabel>Five strategic themes</BoardLabel>
+      <TitlePills items={themes} />
 
       <BoardLabel color={ACCENT_DEEP}>Sequenced into a build logic</BoardLabel>
-      <div style={autoGrid(210)}>
-        {phases.map(({ phase, title, color, items }) => (
-          <div key={phase} style={{ background: '#14151A', border: `1px solid ${color}33`, borderRadius: 12, overflow: 'hidden' }}>
-            <div style={{ background: `${color}12`, padding: '8px 14px', borderBottom: `2px solid ${color}` }}>
-              <span style={{ fontSize: 12, fontWeight: 800, color, letterSpacing: '0.08em', textTransform: 'uppercase' }}>{phase}</span>
-              <span style={{ fontSize: 15, fontWeight: 800, color: DARK, marginLeft: 8 }}>{title}</span>
-            </div>
-            <div style={{ padding: '12px 14px', fontSize: 14, color: MID, lineHeight: 1.6 }}>{items}</div>
-          </div>
-        ))}
-      </div>
+      <TitlePills items={phases} color={ACCENT_DEEP} />
+
+      <GroupTakeaway>Integration builds the platform, the wallet builds the habit, and experience becomes the moat — sequenced so trust is earned before the ecosystem opens.</GroupTakeaway>
     </div>
   );
 }
 
-/* CH6 — three brand routes, recommendation, positioning territory, and
-   personality attributes. */
+/* STEP 6 — the three brand routes and the personality behind the chosen one. */
 function Ch6Visual() {
-  const routes = [
-    {
-      label: 'Route A', title: 'Extend the Telecom Brand', color: '#696969',
-      pros: ['Inherited trust immediately', 'Lower marketing investment'],
-      cons: ['Perceived as a utility, not a lifestyle app', 'Limits emotional appeal and youth adoption'],
-      selected: false,
-    },
-    {
-      label: 'Route B', title: 'Standalone Lifestyle Brand', color: PURPLE,
-      pros: ['Full creative freedom', 'No legacy brand baggage'],
-      cons: ['Zero inherited trust', 'High customer acquisition cost (CAC) to build brand from scratch'],
-      selected: false,
-    },
-    {
-      label: 'Route C', title: 'New Brand, Endorsed by Telecom', color: ACCENT,
-      pros: ['Fresh lifestyle positioning', 'Telecom endorsement provides trust scaffolding', 'Attracts new audience segments'],
-      cons: ['Requires clear brand architecture discipline'],
-      selected: true,
-    },
+  const routes: PillItem[] = [
+    'Route A — Extend the Telecom Brand',
+    'Route B — Standalone Lifestyle Brand',
+    { label: 'Route C — New Brand, Endorsed by Telecom', badge: 'RECOMMENDED' },
   ];
-
   const personality = ['Trustworthy', 'Effortless', 'Local at heart', 'Warm, not corporate', 'Quietly premium'];
 
   return (
-    <div style={{ margin: '28px 0', display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <div style={autoGrid(230)}>
-        {routes.map(({ label, title, color, pros, cons, selected }) => (
-          <div key={label} style={{ background: selected ? `${color}08` : '#14151A', border: selected ? `2px solid ${color}` : '1px solid #2A2C33', borderRadius: 12, overflow: 'hidden', position: 'relative' }}>
-            {selected && (
-              <div style={{ position: 'absolute', top: 10, right: 10, background: color, color: '#14151A', fontSize: 10, fontWeight: 800, padding: '2px 8px', borderRadius: 20, letterSpacing: '0.06em' }}>
-                RECOMMENDED
-              </div>
-            )}
-            <div style={{ padding: '14px 14px 0' }}>
-              <div style={{ fontSize: 11, fontWeight: 800, color, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>{label}</div>
-              <div style={{ fontSize: 15, fontWeight: 800, color: DARK, lineHeight: 1.3, marginBottom: 10 }}>{title}</div>
-            </div>
-            <div style={{ padding: '0 14px 14px', display: 'flex', flexDirection: 'column', gap: 6 }}>
-              {pros.map(p => (
-                <div key={p} style={{ display: 'flex', gap: 6, alignItems: 'flex-start' }}>
-                  <span style={{ color: GREEN, fontSize: 12, flexShrink: 0, marginTop: 2 }}>✓</span>
-                  <span style={{ fontSize: 13, color: MID, lineHeight: 1.5 }}>{p}</span>
-                </div>
-              ))}
-              {cons.map(c => (
-                <div key={c} style={{ display: 'flex', gap: 6, alignItems: 'flex-start' }}>
-                  <span style={{ color: '#ef4444', fontSize: 12, flexShrink: 0, marginTop: 2 }}>✗</span>
-                  <span style={{ fontSize: 13, color: MID, lineHeight: 1.5 }}>{c}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
+    <div style={{ margin: '28px 0' }}>
+      <BoardLabel>Three brand routes</BoardLabel>
+      <TitlePills items={routes} />
+      <GroupTakeaway>The answer was Route C — a new lifestyle brand with the telecom as a trust endorser, not the face: fresh enough to feel like the user's, backed enough to be trusted.</GroupTakeaway>
 
-      <div style={{ background: `${ACCENT}0d`, border: `1px solid ${ACCENT}33`, borderRadius: 10, padding: '14px 18px', textAlign: 'center' }}>
-        <div style={{ fontSize: 14, color: ACCENT, fontWeight: 700 }}>
-          Decision: A new lifestyle brand — visually and tonally distinct — with the telecom brand as a trust endorser, not the face.
-        </div>
-      </div>
-
-      <div style={{ background: '#14151A', border: '1px solid #2A2C33', borderRadius: 12, padding: '16px 18px' }}>
-        <div style={{ fontSize: 13, fontWeight: 800, color: DARK, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>Positioning Territory</div>
-        <div style={{ fontSize: 15.5, color: MID, lineHeight: 1.7, marginBottom: 12 }}>
-          For people living in Qatar who juggle a fragmented digital life, this is the one trusted place where everyday
-          essentials — payments, services, and local life — simply work together.
-        </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-          {personality.map(p => <Tag key={p} color={ACCENT_DEEP}>{p}</Tag>)}
-        </div>
+      <BoardLabel color={ACCENT_DEEP}>Brand personality</BoardLabel>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+        {personality.map(p => <Tag key={p} color={ACCENT_DEEP}>{p}</Tag>)}
       </div>
     </div>
   );
@@ -681,7 +352,7 @@ export default function SuperAppCaseStudy({ onNavigate }: Props) {
           </div>
           <h1 style={{ fontFamily: "'Roboto', 'Helvetica Neue', sans-serif", fontSize: 'clamp(36px, 5.5vw, 62px)', fontWeight: 300, color: DARK, letterSpacing: '-0.03em', lineHeight: 1.05, marginBottom: 16 }}>
             Designing a Super App<br />
-            <span style={{ fontStyle: 'italic', color: ACCENT }}>Worth Trusting.</span>
+            <span style={{ color: ACCENT }}>Worth Trusting.</span>
           </h1>
           <p style={{ fontSize: 20, color: MID, lineHeight: 1.7, maxWidth: 560, marginBottom: 24 }}>
             A strategic UX case study for a telecom brand entering Qatar's digital ecosystem — from market research to brand strategy to product architecture.
@@ -698,31 +369,24 @@ export default function SuperAppCaseStudy({ onNavigate }: Props) {
 
         {/* Accordion toolbar — skim the six takeaways, expand what interests you */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, marginBottom: 24, paddingBottom: 16, borderBottom: '1px solid #2A2C33' }}>
-          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 500, color: MID, letterSpacing: '0.1em', textTransform: 'uppercase' }}>The engagement, in six chapters</div>
+          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 500, color: MID, letterSpacing: '0.1em', textTransform: 'uppercase' }}>The engagement, in six steps</div>
           <button onClick={toggleAll} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 600, color: ACCENT, background: 'none', border: 'none', cursor: 'pointer' }}>
             {allOpen ? 'Collapse all' : 'Expand all'}
           </button>
         </div>
 
         {/* ── Chapter 1 ── */}
-        <Chapter id="ch1" num="01" label="The Opening Question" takeaway="The opportunity isn't to add a feature — it's to remove someone's chaos." open={isOpen('ch1')} onToggle={() => toggleChapter('ch1')} innerRef={el => { chapterRefs.current['ch1'] = el; }}>
+        <Chapter id="ch1" num="01" label="The Opening Question" takeaway="How can I transform my existing platform to a super app?" open={isOpen('ch1')} onToggle={() => toggleChapter('ch1')} innerRef={el => { chapterRefs.current['ch1'] = el; }}>
           <Body>
-            Qatar is a near-total digital society: ~99% smartphone and internet penetration, world-class 5G and fiber, high disposable income, and a young, diverse population that prefers digital for everyday services — accelerated by QNV 2030. But high digital readiness doesn't mean users want more apps; it means they're ready for a better one.
+            This is how we approached the question. We reframed it: "could a telecom brand — with its trust, infrastructure, and reach — become the platform that connects the fragmented digital life of people in Qatar?"
           </Body>
-          <Body>
-            The brief arrived as: "should we add digital services to our telecom app?" We reframed it: "could a telecom brand — with its trust, infrastructure, and reach — become the platform that connects the fragmented digital life of people in Qatar?" A fundamentally different question. The analysis then ran as a finding-to-implication chain: every market signal translated into a UX consequence before any product decision.
-          </Body>
-          <Callout icon="💡">The strategic reframe: from "add a feature" to "become the connective tissue of daily digital life."</Callout>
           <Ch1Visual />
         </Chapter>
 
         {/* ── Chapter 2 ── */}
-        <Chapter id="ch2" num="02" label="The Competitive Landscape" takeaway="Everyone owns a vertical. Nobody owns the space between them." open={isOpen('ch2')} onToggle={() => toggleChapter('ch2')} innerRef={el => { chapterRefs.current['ch2'] = el; }}>
+        <Chapter id="ch2" num="02" label="The Competitive Landscape" takeaway="Match what the leaders do well, borrow the best from the rest." open={isOpen('ch2')} onToggle={() => toggleChapter('ch2')} innerRef={el => { chapterRefs.current['ch2'] = el; }}>
           <Body>
-            We mapped the landscape in two tiers. Direct competitors — Snoonu, Talabat, Rafeeq, Careem — were profiled for strengths, weaknesses, and UX gaps. The more revealing tier was indirect: banking apps, government platforms like Metrash2 and Hukoomi, telecom self-care, international commerce. Each holds a fragment of the user's trust without competing for the whole day.
-          </Body>
-          <Body>
-            The feature-coverage matrix made the white space undeniable: no player integrates payments, government services, and telecom into one lifestyle layer. The handoff between verticals — finishing a food order and paying a bill, ending a commute and ordering groceries — is owned by no one. That gap is the entry point.
+            We studied the landscape in two tiers, looking for what to learn. Direct competitors — Snoonu, Talabat, Rafeeq, Careem — were profiled for the strengths worth matching and the weaknesses worth designing out. Indirect competitors — banking apps, government platforms like Metrash2 and Hukoomi, telecom self-care, international commerce — were mined for the single feature each does best, to fold into the super app.
           </Body>
           <Ch2Visual />
         </Chapter>
@@ -732,9 +396,6 @@ export default function SuperAppCaseStudy({ onNavigate }: Props) {
           <Body>
             Consumer behavior research across Qatar's expat and national demographics revealed a clear hierarchy: convenience beats price, which beats brand loyalty. Willingness to adopt is high — but only when value is clear and friction is low. Adoption drops sharply when onboarding is long, services feel fragmented, or the UX lacks confidence signals.
           </Body>
-          <Body>
-            The numbers agree. Drop-off on poor onboarding (60–70%) isn't a bug to fix later — it's a business-critical risk to design out from day one. The trust-to-completion lift (25–35%) makes brand equity a conversion driver, not a marketing asset. With returning users generating 70%+ of platform value, retention — not acquisition — defines the brief.
-          </Body>
           <Ch3Visual />
         </Chapter>
 
@@ -742,9 +403,6 @@ export default function SuperAppCaseStudy({ onNavigate }: Props) {
         <Chapter id="ch4" num="04" label="The Global Benchmark" takeaway="The pattern is consistent: one great thing first. Many things later." open={isOpen('ch4')} onToggle={() => toggleChapter('ch4')} innerRef={el => { chapterRefs.current['ch4'] = el; }}>
           <Body>
             Analysing WeChat (China), Grab (Southeast Asia), Careem (MENA), and Rappi (Latin America), four durable patterns emerged. None started by launching everything at once — and attempts to clone WeChat's end-state elsewhere, without earning the habit first, consistently failed.
-          </Body>
-          <Body>
-            Payments were the most instructive insight: every platform achieving durable daily use locked its position in through a wallet layer first. Payments aren't a feature — they're what turns occasional use into daily ritual. Careem added a second lesson: localization is strategy, not polish.
           </Body>
           <Ch4Visual />
         </Chapter>
@@ -754,9 +412,6 @@ export default function SuperAppCaseStudy({ onNavigate }: Props) {
           <Body>
             From the competitive audit, behavioral research, and benchmark analysis, five strategic opportunity themes emerged — not feature lists, but design principles shaping every decision from architecture to copy.
           </Body>
-          <Body>
-            The themes are sequenced into a phased build: integration creates the platform, the wallet creates the habit, daily utility creates return behavior, personalization creates loyalty, and experience becomes the moat. The local marketplace — under-served per the analysis — is held for Phase 3, after trust and habit are earned.
-          </Body>
           <Ch5Visual />
         </Chapter>
 
@@ -764,9 +419,6 @@ export default function SuperAppCaseStudy({ onNavigate }: Props) {
         <Chapter id="ch6" num="06" label="The Brand Decision" takeaway="The brand has to feel like it belongs to the user — not to the telco." open={isOpen('ch6')} onToggle={() => toggleChapter('ch6')} innerRef={el => { chapterRefs.current['ch6'] = el; }}>
           <Body>
             Three branding routes were evaluated: extending the telecom brand directly, a standalone lifestyle brand with no visible connection, or a new brand with the telecom as a visible but secondary endorser.
-          </Body>
-          <Body>
-            The recommendation was Route C — a new lifestyle brand with telecom endorsement. A pure brand extension limits positioning to "utility," which works for bills but not daily lifestyle integration. A standalone brand abandons the client's most valuable asset: a decade of trust with millions of subscribers.
           </Body>
           <Ch6Visual />
         </Chapter>

@@ -13,7 +13,7 @@ const MUTE = '#a1a1aa';     // secondary line / placeholder text
 const FILL = '#e4e4e7';     // block fill
 const SOFT = '#f4f4f5';     // panel fill
 const PAPER = '#ffffff';
-const MARK = '#E8963C';     // amber — reserved for the one thing that matters
+const MARK = '#4AE5BD';     // mint green — reserved for the one thing that matters
 
 /* ── Frames ── */
 function Phone({ children }: { children: React.ReactNode }) {

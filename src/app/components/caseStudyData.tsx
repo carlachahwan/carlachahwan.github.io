@@ -72,8 +72,8 @@ function BaguetteArchitecture() {
 function TotersArchitecture() {
   const green = '#16A34A';
   const flows = [
-    { lane: 'Deliver Something Flow', nodes: ['Service Select', 'Pickup Details', 'Dropoff Details', 'Pricing & Review', 'Order Confirmed'] },
-    { lane: 'Buy Something Flow',     nodes: ['Service Select', 'Item Details', 'Pickup Address', 'Pricing & Review', 'Order Confirmed'] },
+    { lane: 'Deliver Something Flow', nodes: ['Service Select', 'Pickup Address', 'Item Details', 'Dropoff Address', 'Pricing & Review', 'Order Confirmed'] },
+    { lane: 'Buy Something Flow',     nodes: ['Service Select', 'Item Details', 'Pickup Address', 'Dropoff Address', 'Pricing & Review', 'Order Confirmed'] },
   ];
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
@@ -194,8 +194,8 @@ export const baguetteData: CaseStudyData = {
   role: 'Lead UX Strategist & Architect',
   year: '2024',
   tags: ['React', 'SaaS', 'B2B', 'HR Tech', 'MENA'],
-  accentColor: '#f59e0b',
-  accentBg: '#fffbeb',
+  accentColor: '#059669',
+  accentBg: '#ecfdf5',
   overview: 'Baguette is a business super-app for SMEs across the UAE and GCC. I led UX strategy on its Recruitment Module — a zero-to-one engagement from research and information architecture through to high-fidelity UI.',
   challenge: 'HR managers at SMEs ran recruitment across 3–4 disconnected tools (LinkedIn, spreadsheets, email, WhatsApp) — causing data loss and zero visibility into the hiring funnel.',
   strategy: 'One role-aware dashboard consolidates posting, resume parsing, AI-ranking, scheduling and analytics — shaped by dual-persona research (an HR manager and a founder) and kept simple for non-technical operators.',
@@ -239,8 +239,8 @@ export const totersData: CaseStudyData = {
   architectureElement: <TotersArchitecture />,
   screens: [
     { caption: 'Service Selection — A clear binary choice gate routes users into the correct multi-step flow before any form input, eliminating wrong-flow errors.', element: <div style={{ padding: 16, display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', minHeight: 280 }}><TotersServiceSelect /></div> },
-    { caption: 'Pickup Details (Step 1) — Pre-filled profile data and saved address cards minimise input for repeat users ordering from familiar locations.', element: <div style={{ padding: 16, display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', minHeight: 280 }}><TotersPickupDetails /></div> },
-    { caption: 'Item Details (Step 2) — Package size selector with incremental pricing and an add-items list with edit/delete actions for the Buy Something flow.', element: <div style={{ padding: 16, display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', minHeight: 280 }}><TotersItemDetails /></div> },
+    { caption: 'Pickup Address (Step 1) — Pre-filled profile data and saved address cards minimise input for repeat users ordering from familiar locations.', element: <div style={{ padding: 16, display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', minHeight: 280 }}><TotersPickupDetails /></div> },
+    { caption: 'Item Details (Step 3) — Package size selector with incremental pricing and an add-items list with edit/delete actions for the Buy Something flow.', element: <div style={{ padding: 16, display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', minHeight: 280 }}><TotersItemDetails /></div> },
   ],
 };
 

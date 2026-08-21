@@ -120,7 +120,7 @@ export function TotersServiceSelect() {
   );
 }
 
-/* ── SCREEN 2: Pickup Details (Step 1 of 4) ── */
+/* ── SCREEN 2: Pickup Address (Step 1 of 4) ── */
 export function TotersPickupDetails() {
   return (
     <PhoneFrame>
@@ -131,7 +131,7 @@ export function TotersPickupDetails() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, paddingBottom: 6, borderBottom: '1px solid #E5E7EB' }}>
           <div style={{ width: 24, height: 24, border: '1px solid #E5E7EB', borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10 }}>📍</div>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 800, color: BK }}>Pickup Details</div>
+            <div style={{ fontSize: 11, fontWeight: 800, color: BK }}>Pickup Address</div>
             <div style={{ fontSize: 7, color: TX }}>Where should we collect the package?</div>
           </div>
         </div>
@@ -200,7 +200,7 @@ export function TotersPickupDetails() {
   );
 }
 
-/* ── SCREEN 3: Buy Something — Item List (Step 2 of 4) ── */
+/* ── SCREEN 3: Buy Something — Item List (Step 3 of 4) ── */
 export function TotersItemDetails() {
   const items = [
     { name: 'Milk', detail: 'Khoury · Light', qty: 1, price: '$3.99' },
@@ -210,7 +210,7 @@ export function TotersItemDetails() {
 
   return (
     <PhoneFrame>
-      <StepDots current={2} />
+      <StepDots current={3} />
       <div style={{ flex: 1, padding: '4px 14px 10px', display: 'flex', flexDirection: 'column', gap: 8, overflowY: 'hidden' }}>
 
         {/* Header */}

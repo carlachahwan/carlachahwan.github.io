@@ -61,7 +61,7 @@ export default function ClientLogos() {
         }
         .logo-tile:hover {
           transform: translateY(-3px);
-          box-shadow: 0 8px 28px rgba(232,150,60,0.18);
+          box-shadow: 0 8px 28px rgba(74,229,189,0.18);
         }
         @media (prefers-reduced-motion: reduce) {
           .logo-marquee-track { animation: none; }
