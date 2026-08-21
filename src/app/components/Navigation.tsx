@@ -3,7 +3,6 @@ import { Download, Linkedin, Menu, X } from 'lucide-react';
 import { Page } from '../App';
 import { downloadCV } from '../utils/downloadCV';
 import { T } from './playbook';
-import profilePhoto from '../../imports/Updated_Me.png';
 
 interface NavigationProps {
   currentPage: Page;
@@ -27,13 +26,8 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
       style={{ background: 'rgba(14,15,19,0.85)', backdropFilter: 'blur(14px)', borderColor: T.line }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between" style={{ height: 72 }}>
-        {/* Logo — photo + name */}
-        <button onClick={() => onNavigate('home')} className="flex items-center gap-3">
-          <img
-            src={profilePhoto}
-            alt="Carla Chahwan"
-            style={{ width: 36, height: 36, borderRadius: '50%', objectFit: 'cover', objectPosition: 'center top', border: `1.5px solid ${T.amber}`, flexShrink: 0 }}
-          />
+        {/* Logo — name only */}
+        <button onClick={() => onNavigate('home')} className="flex items-center">
           <span style={{ fontFamily: T.serif, color: T.text, fontSize: 20, fontWeight: 400, letterSpacing: '-0.01em' }}>
             Carla Chahwan
           </span>
