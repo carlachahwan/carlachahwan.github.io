@@ -16,7 +16,7 @@ export const T = {
   sage: '#8A9B8E',      // muted sage-grey text
   dim: '#696969',       // dimmer label
   faint: '#3A3D45',     // faintest text / struck-through
-  amber: '#4AE5BD',     // primary accent (mint green)
+  amber: '#2D9D94',     // primary accent (mint green)
   amberDeep: '#e0d9c3', // hover — deeper mint
   gold: '#34D399',      // secondary accent — emerald green (distinct from primary mint)
   line: '#2A2C33',      // hairline / border
@@ -24,7 +24,7 @@ export const T = {
   /* Vibrant accents — used sparingly against the warm base so they read as
      highlights rather than a second theme. Mint = positive/outcome states,
      cyan = interactive/live signals. Both sing on near-black. */
-  mint: '#4AE5BD',
+  mint: '#2D9D94',
   cyan: '#22D3EE',
   violet: '#e0d9c3',
 

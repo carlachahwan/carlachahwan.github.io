@@ -10,7 +10,7 @@ interface Props { onNavigate: (page: Page) => void; }
    Amber-dominant with warm/sage variety so the six chapters' finding cards
    stay distinguishable. DARK/MID are TEXT colours (cream / sage on near-black);
    LIGHT is the card surface. */
-const ACCENT      = '#4AE5BD';  // primary accent (mint green, brand)
+const ACCENT      = '#2D9D94';  // primary accent (mint green, brand)
 const ACCENT_DEEP = '#34ad92';  // deeper mint
 const GOLD        = '#34D399';  // secondary accent — emerald green (distinct from primary mint)
 const PURPLE      = '#e0d9c3';  // violet — third accent
