@@ -98,7 +98,7 @@ export default function ProjectsPage({ onNavigate, initialTab = 'case-studies' }
       <section className="relative overflow-hidden" style={{ background: T.bg, paddingTop: 72 }}>
         <BgHex corner="top-right" opacity={0.09} />
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10 py-20">
-          <Eyebrow color={T.violet}>Selected Work</Eyebrow>
+          <Eyebrow color={T.gold}>Selected Work</Eyebrow>
           <h1 style={{ fontFamily: T.serif, fontSize: 'clamp(40px, 5.5vw, 68px)', fontWeight: 300, color: T.text, letterSpacing: '-0.03em', lineHeight: 1.05, marginTop: 20, marginBottom: 24 }}>
             Case Studies &amp;<br />
             <span style={{ fontStyle: 'italic', color: T.amber }}>Deep-Dive Projects</span>

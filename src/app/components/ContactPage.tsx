@@ -8,7 +8,7 @@ const SERVER_URL = `https://${projectId}.supabase.co/functions/v1/make-server-10
 
 // Carla's Calendly scheduling link — themed to the dark editorial palette.
 const CALENDLY_URL = 'https://calendly.com/chahwancarla1/30min';
-const CALENDLY_EMBED_URL = `${CALENDLY_URL}?hide_gdpr_banner=1&background_color=14151A&text_color=F4F1EA&primary_color=4AE5BD`;
+const CALENDLY_EMBED_URL = `${CALENDLY_URL}?hide_gdpr_banner=1&background_color=14151A&text_color=F4F1EA&primary_color=2D9D94`;
 // Height shown while the widget loads. Once Calendly reports its real content
 // height (see calendly.page_height below), the frame resizes to match so there's
 // no inner scrollbar and no empty space beneath the calendar.

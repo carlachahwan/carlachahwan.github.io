@@ -16,9 +16,9 @@ export const T = {
   sage: '#8A9B8E',      // muted sage-grey text
   dim: '#696969',       // dimmer label
   faint: '#3A3D45',     // faintest text / struck-through
-  amber: '#2D9D94',     // primary accent (mint green)
-  amberDeep: '#e0d9c3', // hover — deeper mint
-  gold: '#34D399',      // secondary accent — emerald green (distinct from primary mint)
+  amber: '#2D9D94',     // primary accent — teal
+  amberDeep: '#247F78', // hover — deeper teal
+  gold: '#C86F4C',      // complementary accent — terracotta
   line: '#2A2C33',      // hairline / border
 
   /* Vibrant accents — used sparingly against the warm base so they read as

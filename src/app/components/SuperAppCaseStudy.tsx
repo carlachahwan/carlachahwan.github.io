@@ -11,9 +11,9 @@ interface Props { onNavigate: (page: Page) => void; }
    stay distinguishable. DARK/MID are TEXT colours (cream / sage on near-black);
    LIGHT is the card surface. */
 const ACCENT      = '#2D9D94';  // primary accent (mint green, brand)
-const ACCENT_DEEP = '#34ad92';  // deeper mint
-const GOLD        = '#34D399';  // secondary accent — emerald green (distinct from primary mint)
-const PURPLE      = '#e0d9c3';  // violet — third accent
+const ACCENT_DEEP = '#247F78';  // deeper teal
+const GOLD        = '#C86F4C';  // complementary accent — terracotta
+const PURPLE      = '#D98C74';  // secondary warm — clay/salmon (lighter terracotta)
 const DARK        = '#F4F1EA';  // cream — heading text
 const MID         = '#8A9B8E';  // sage — body text
 const LIGHT       = '#14151A';  // card surface

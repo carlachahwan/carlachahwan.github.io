@@ -4,7 +4,7 @@ import { downloadCV } from '../utils/downloadCV';
 import ClientLogos from './ClientLogos';
 import { T, Eyebrow, HexMark, hexPoints, glow } from './playbook';
 import { CaseStudiesArt, MobileLogicArt, WireframeArt, WorkArtKeyframes } from './WorkIllustrations';
-import heroPortrait from '../../imports/carla-hero.png';
+import heroPortrait from '../../imports/carla-portrait.png';
 
 interface HomePageProps {
   onNavigate: (page: Page) => void;
@@ -21,7 +21,7 @@ const expertise = [
   },
   {
     icon: <Layers size={20} />,
-    accent: T.cyan,
+    accent: T.gold,
     title: 'Information Architecture',
     desc: 'Designing scalable content structures, navigation systems, and mental models that reduce cognitive load across complex platforms.',
   },
@@ -33,7 +33,7 @@ const expertise = [
   },
   {
     icon: <Users size={20} />,
-    accent: T.violet,
+    accent: T.gold,
     title: 'Product Leadership',
     desc: 'Orchestrating cross-functional teams of developers, designers, and stakeholders from ideation through delivery.',
   },
@@ -201,7 +201,7 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16">
             <div>
-              <Eyebrow color={T.violet}>Featured Work</Eyebrow>
+              <Eyebrow color={T.gold}>Featured Work</Eyebrow>
               <h2 style={{ fontFamily: T.serif, fontSize: 'clamp(32px, 3.5vw, 48px)', fontWeight: 300, color: T.text, letterSpacing: '-0.025em', lineHeight: 1.1, marginTop: 18 }}>
                 Explore by category
               </h2>
