@@ -23,7 +23,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
   return (
     <nav
       className="fixed top-0 left-0 right-0 z-50 border-b"
-      style={{ background: 'rgba(14,15,19,0.85)', backdropFilter: 'blur(14px)', borderColor: T.line }}
+      style={{ background: 'rgba(229,228,224,0.8)', backdropFilter: 'blur(14px)', borderColor: T.line }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between" style={{ height: 72 }}>
         {/* Logo — name only */}

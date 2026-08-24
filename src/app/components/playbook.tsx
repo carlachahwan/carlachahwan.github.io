@@ -8,18 +8,18 @@ import { ReactNode, CSSProperties } from 'react';
 
 /* ── Tokens ─────────────────────────────────────────────────────────────── */
 export const T = {
-  bg: '#0E0F13',        // near-black background
-  bgCard: '#14151A',    // card surface
-  bgSoft: '#1A1B21',    // secondary/muted surface
-  text: '#F4F1EA',      // warm cream
-  stone: '#C9CBC0',     // long-form body copy
-  sage: '#8A9B8E',      // muted sage-grey text
-  dim: '#696969',       // dimmer label
-  faint: '#3A3D45',     // faintest text / struck-through
+  bg: '#E5E4E0',        // parchment canvas (light editorial)
+  bgCard: '#FFFFFF',    // paper — elevated card surface
+  bgSoft: '#DEDCD4',    // stone — quiet secondary surface
+  text: '#1D1D1D',      // ink — primary text
+  stone: '#33332F',     // dark body copy
+  sage: '#5A5F57',      // muted body / secondary text
+  dim: '#8A857A',       // dim label
+  faint: '#BFBEBE',     // faint / struck-through
   amber: '#2D9D94',     // primary accent — teal
   amberDeep: '#247F78', // hover — deeper teal
   gold: '#C86F4C',      // complementary accent — terracotta
-  line: '#2A2C33',      // hairline / border
+  line: '#D3CDC1',      // warm ash hairline / border
 
   /* Vibrant accents — used sparingly against the warm base so they read as
      highlights rather than a second theme. Mint = positive/outcome states,
