@@ -221,7 +221,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             </button>
           </div>
           <div className="reveal order-1 lg:order-2 flex justify-center lg:justify-end">
-            <img src={aboutPortrait} alt="Carla Chahwan" className="w-auto" style={{ maxHeight: 560, objectFit: 'contain' }} />
+            <div style={{ background: '#EEEBE3', padding: '0 clamp(10px,2.5vw,28px)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
+              <img src={aboutPortrait} alt="Carla Chahwan" className="w-auto" style={{ maxHeight: 560, objectFit: 'contain', display: 'block' }} />
+            </div>
           </div>
         </div>
       </section>
