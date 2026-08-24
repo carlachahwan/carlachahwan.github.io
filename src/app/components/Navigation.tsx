@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Download, Linkedin, Menu, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Download, Linkedin, Menu, X, Sun, Moon } from 'lucide-react';
 import { Page } from '../App';
 import { downloadCV } from '../utils/downloadCV';
 import { T } from './playbook';
@@ -19,11 +19,26 @@ const navLinks: { label: string; page: Page }[] = [
 
 export default function Navigation({ currentPage, onNavigate }: NavigationProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [dark, setDark] = useState(false);
+
+  // Restore the saved theme on mount and reflect it on <html>.
+  useEffect(() => {
+    const isDark = localStorage.getItem('theme') === 'dark';
+    setDark(isDark);
+    document.documentElement.dataset.theme = isDark ? 'dark' : 'light';
+  }, []);
+
+  const toggleTheme = () => setDark(d => {
+    const nd = !d;
+    document.documentElement.dataset.theme = nd ? 'dark' : 'light';
+    localStorage.setItem('theme', nd ? 'dark' : 'light');
+    return nd;
+  });
 
   return (
     <nav
       className="fixed top-0 left-0 right-0 z-50 border-b"
-      style={{ background: 'rgba(229,228,224,0.8)', backdropFilter: 'blur(14px)', borderColor: T.line }}
+      style={{ background: 'var(--nav-bg)', backdropFilter: 'blur(14px)', borderColor: T.line }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between" style={{ height: 72 }}>
         {/* Logo — name only */}
@@ -63,6 +78,16 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
           >
             <Download size={13} />
             Download CV
+          </button>
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle light or dark theme"
+            className="flex items-center justify-center transition-all"
+            style={{ width: 36, height: 36, border: `1px solid ${T.line}`, color: T.text, borderRadius: 3, background: 'transparent', cursor: 'pointer' }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = T.amber; e.currentTarget.style.color = T.amber; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = T.line; e.currentTarget.style.color = T.text; }}
+          >
+            {dark ? <Sun size={16} /> : <Moon size={16} />}
           </button>
           <a
             href={LINKEDIN_URL}
@@ -105,6 +130,14 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
             >
               <Download size={13} />
               Download CV
+            </button>
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle light or dark theme"
+              className="flex items-center justify-center"
+              style={{ width: 38, height: 38, border: `1px solid ${T.line}`, color: T.text, borderRadius: 3, background: 'transparent', cursor: 'pointer' }}
+            >
+              {dark ? <Sun size={16} /> : <Moon size={16} />}
             </button>
             <a
               href={LINKEDIN_URL}

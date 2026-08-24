@@ -54,7 +54,7 @@ export default function App() {
   const isCaseStudy = CASE_STUDY_PAGES.includes(currentPage);
 
   return (
-    <div className="min-h-screen" style={{ fontFamily: "'Inter', sans-serif", background: '#0E0F13' }}>
+    <div className="min-h-screen" style={{ fontFamily: "'Inter', sans-serif", background: 'var(--bg)' }}>
       <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
       <main style={{ paddingTop: isCaseStudy ? 72 : 0 }}>
         {currentPage === 'home'        && <HomePage onNavigate={handleNavigate} />}

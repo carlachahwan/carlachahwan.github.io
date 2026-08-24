@@ -76,14 +76,14 @@ export default function ProjectDetailPage({ data, onNavigate }: Props) {
                 <HexMark size={11} />
                 <span style={{ fontFamily: T.sans, fontSize: 13, fontWeight: 500, color: T.amber, letterSpacing: '0.14em', textTransform: 'uppercase' }}>The Challenge</span>
               </div>
-              <p style={{ fontSize: 16.5, color: '#C9CBC0', lineHeight: 1.75 }}>{data.strategy}</p>
+              <p style={{ fontSize: 16.5, color: 'var(--stone)', lineHeight: 1.75 }}>{data.strategy}</p>
             </div>
             <div style={{ background: T.bgCard, border: `1px solid ${T.mint}22`, borderRadius: 14, padding: '26px 28px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
                 <HexMark size={11} color={T.mint} />
                 <span style={{ fontFamily: T.sans, fontSize: 13, fontWeight: 500, color: T.mint, letterSpacing: '0.14em', textTransform: 'uppercase' }}>The Solution</span>
               </div>
-              <p style={{ fontSize: 16.5, color: '#C9CBC0', lineHeight: 1.75 }}>{data.translation}</p>
+              <p style={{ fontSize: 16.5, color: 'var(--stone)', lineHeight: 1.75 }}>{data.translation}</p>
             </div>
           </div>
         </section>

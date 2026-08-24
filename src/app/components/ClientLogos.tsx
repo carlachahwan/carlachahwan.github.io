@@ -46,8 +46,8 @@ export default function ClientLogos() {
           height: 104px;
           width: 208px;
           padding: 20px 26px;
-          background: #F4F1EA;
-          border: 1px solid rgba(244,241,234,0.12);
+          background: #F5F3EE;
+          border: 1px solid rgba(29,29,29,0.08);
           border-radius: 10px;
           transition: transform 0.25s ease, box-shadow 0.25s ease;
         }

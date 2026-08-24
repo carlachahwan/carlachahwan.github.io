@@ -14,11 +14,11 @@ const ACCENT      = '#2D9D94';  // primary accent (mint green, brand)
 const ACCENT_DEEP = '#247F78';  // deeper teal
 const GOLD        = '#C86F4C';  // complementary accent — terracotta
 const PURPLE      = '#D98C74';  // secondary warm — clay/salmon (lighter terracotta)
-const DARK        = '#1D1D1D';  // ink — heading text (light editorial)
-const MID         = '#5A5F57';  // muted ink — body/label text
-const LIGHT       = '#FFFFFF';  // paper — card surface
-const PAGE        = '#E5E4E0';  // parchment canvas
-const ASH         = '#D8D2C6';  // warm hairline border
+const DARK        = 'var(--text)';    // heading text (theme-aware)
+const MID         = 'var(--sage)';    // body / label text
+const LIGHT       = 'var(--bgCard)';  // card surface
+const PAGE        = 'var(--bg)';       // page canvas
+const ASH         = 'var(--line)';     // hairline border
 
 /* ── chapter definitions ── */
 const CHAPTERS = [
@@ -57,12 +57,12 @@ function TitlePills({ items, color = ACCENT }: { items: PillItem[]; color?: stri
         const label = typeof it === 'string' ? it : it.label;
         const badge = typeof it === 'string' ? undefined : it.badge;
         return (
-          <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#FFFFFF', border: `1px solid ${color}33`, borderRadius: 0, padding: '14px 16px' }}>
+          <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 10, background: LIGHT, border: `1px solid ${color}33`, borderRadius: 0, padding: '14px 16px' }}>
             <svg width="10" height="10" viewBox="0 0 10 10" style={{ flexShrink: 0 }} aria-hidden="true">
               <polygon points="5,0.5 9.33,3 9.33,7.5 5,10 0.67,7.5 0.67,3" fill={color} />
             </svg>
             <span style={{ fontSize: 15, fontWeight: 700, color: DARK, lineHeight: 1.3 }}>{label}</span>
-            {badge && <span style={{ marginLeft: 'auto', fontSize: 10, fontWeight: 800, color: '#FFFFFF', background: color, padding: '2px 8px', borderRadius: 20, letterSpacing: '0.06em', flexShrink: 0 }}>{badge}</span>}
+            {badge && <span style={{ marginLeft: 'auto', fontSize: 10, fontWeight: 800, color: '#141414', background: color, padding: '2px 8px', borderRadius: 20, letterSpacing: '0.06em', flexShrink: 0 }}>{badge}</span>}
           </div>
         );
       })}
@@ -115,7 +115,7 @@ function Chapter({ id, num, label, takeaway, open, onToggle, innerRef, children 
     <section
       ref={innerRef}
       id={id}
-      style={{ scrollMarginTop: 90, marginBottom: 16, border: `1px solid ${open ? `${ACCENT}55` : '#D8D2C6'}`, borderRadius: 0, overflow: 'hidden', background: LIGHT, transition: 'border-color 0.25s ease' }}
+      style={{ scrollMarginTop: 90, marginBottom: 16, border: `1px solid ${open ? `${ACCENT}55` : 'var(--line)'}`, borderRadius: 0, overflow: 'hidden', background: LIGHT, transition: 'border-color 0.25s ease' }}
     >
       <button
         onClick={onToggle}
@@ -127,7 +127,7 @@ function Chapter({ id, num, label, takeaway, open, onToggle, innerRef, children 
             <polygon points="5,0.5 9.33,3 9.33,7.5 5,10 0.67,7.5 0.67,3" fill={ACCENT} />
           </svg>
           <span style={{ fontSize: 13, fontWeight: 500, color: ACCENT, letterSpacing: '0.14em' }}>STEP {num}</span>
-          <div style={{ flex: 1, height: 1, background: '#D8D2C6' }} />
+          <div style={{ flex: 1, height: 1, background: 'var(--line)' }} />
           <ChevronDown size={20} color={open ? ACCENT : MID} style={{ transform: open ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease', flexShrink: 0 }} />
         </div>
         <h2 style={{ fontFamily: "'Roboto', 'Helvetica Neue', sans-serif", fontSize: 'clamp(26px, 3vw, 36px)', fontWeight: 300, color: DARK, letterSpacing: '-0.025em', marginBottom: 12, lineHeight: 1.15 }}>{label}</h2>
@@ -148,7 +148,7 @@ function Chapter({ id, num, label, takeaway, open, onToggle, innerRef, children 
 
 function Body({ children }: { children: React.ReactNode }) {
   // Slightly brighter than sage for comfortable long-form reading on near-black.
-  return <div style={{ fontSize: 18, color: '#45483F', lineHeight: 1.8, marginBottom: 28 }}>{children}</div>;
+  return <div style={{ fontSize: 18, color: 'var(--stone)', lineHeight: 1.8, marginBottom: 28 }}>{children}</div>;
 }
 
 /* ─────────────────────────── Chapter visuals ─────────────────────────── */
@@ -332,7 +332,7 @@ export default function SuperAppCaseStudy({ onNavigate }: Props) {
         }
       `}</style>
       {/* ── Top progress bar ── */}
-      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, height: 3, background: '#D8D2C6', zIndex: 60 }} aria-hidden="true">
+      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, height: 3, background: 'var(--line)', zIndex: 60 }} aria-hidden="true">
         <div style={{ height: '100%', background: ACCENT, width: `${progress}%`, transition: 'width 0.4s ease' }} />
       </div>
 
@@ -362,7 +362,7 @@ export default function SuperAppCaseStudy({ onNavigate }: Props) {
           <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
             {[['Context', 'Qatar · GCC Market Entry'], ['Scope', 'Research → Strategy → Architecture'], ['Output', 'Strategic Roadmap + Brand Framework']].map(([k, v]) => (
               <div key={k}>
-                <div style={{ fontSize: 12, fontWeight: 700, color: '#8A857A', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 2 }}>{k}</div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: 'var(--dim)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 2 }}>{k}</div>
                 <div style={{ fontSize: 16, fontWeight: 600, color: DARK }}>{v}</div>
               </div>
             ))}
@@ -370,7 +370,7 @@ export default function SuperAppCaseStudy({ onNavigate }: Props) {
         </div>
 
         {/* Accordion toolbar — skim the six takeaways, expand what interests you */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, marginBottom: 24, paddingBottom: 16, borderBottom: '1px solid #2A2C33' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, marginBottom: 24, paddingBottom: 16, borderBottom: '1px solid var(--line)' }}>
           <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, fontWeight: 500, color: MID, letterSpacing: '0.1em', textTransform: 'uppercase' }}>The engagement, in six steps</div>
           <button onClick={toggleAll} style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 600, color: ACCENT, background: 'none', border: 'none', cursor: 'pointer' }}>
             {allOpen ? 'Collapse all' : 'Expand all'}
@@ -430,7 +430,7 @@ export default function SuperAppCaseStudy({ onNavigate }: Props) {
           <blockquote style={{ fontFamily: "'Roboto', 'Helvetica Neue', sans-serif", fontSize: 'clamp(24px, 2.8vw, 34px)', fontStyle: 'italic', fontWeight: 300, color: DARK, lineHeight: 1.4, letterSpacing: '-0.02em', margin: 0 }}>
             "The opportunity isn't to build another app with many features — it's to build a <span style={{ color: ACCENT }}>trusted, integrated, personalized ecosystem</span> that becomes part of daily routine."
           </blockquote>
-          <div style={{ marginTop: 16, fontSize: 15, color: '#8A857A', fontWeight: 600 }}>— Strategic Synthesis, Qatar Super App Engagement</div>
+          <div style={{ marginTop: 16, fontSize: 15, color: 'var(--dim)', fontWeight: 600 }}>— Strategic Synthesis, Qatar Super App Engagement</div>
         </div>
 
         {/* ── Read this next ── */}

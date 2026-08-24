@@ -8,18 +8,18 @@ import { ReactNode, CSSProperties } from 'react';
 
 /* ── Tokens ─────────────────────────────────────────────────────────────── */
 export const T = {
-  bg: '#E5E4E0',        // parchment canvas (light editorial)
-  bgCard: '#FFFFFF',    // paper — elevated card surface
-  bgSoft: '#DEDCD4',    // stone — quiet secondary surface
-  text: '#1D1D1D',      // ink — primary text
-  stone: '#33332F',     // dark body copy
-  sage: '#5A5F57',      // muted body / secondary text
-  dim: '#8A857A',       // dim label
-  faint: '#BFBEBE',     // faint / struck-through
-  amber: '#2D9D94',     // primary accent — teal
+  bg: 'var(--bg)',        // parchment (light) / near-black (dark)
+  bgCard: 'var(--bgCard)',// paper card surface
+  bgSoft: 'var(--bgSoft)',// quiet secondary surface
+  text: 'var(--text)',    // ink / cream
+  stone: 'var(--stone)',  // body copy
+  sage: 'var(--sage)',    // muted body / secondary text
+  dim: 'var(--dim)',      // dim label
+  faint: 'var(--faint)',  // faint / struck-through
+  amber: '#2D9D94',     // primary accent — teal (constant across themes)
   amberDeep: '#247F78', // hover — deeper teal
   gold: '#C86F4C',      // complementary accent — terracotta
-  line: '#D3CDC1',      // warm ash hairline / border
+  line: 'var(--line)',    // warm ash / hairline border
 
   /* Vibrant accents — used sparingly against the warm base so they read as
      highlights rather than a second theme. Mint = positive/outcome states,

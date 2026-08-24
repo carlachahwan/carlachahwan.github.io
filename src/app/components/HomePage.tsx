@@ -5,7 +5,7 @@ import { downloadCV } from '../utils/downloadCV';
 import ClientLogos from './ClientLogos';
 import { T, Eyebrow, HexMark, hexPoints, glow } from './playbook';
 import { CaseStudiesArt, MobileLogicArt, WireframeArt, WorkArtKeyframes } from './WorkIllustrations';
-import heroPortrait from '../../imports/carla-portrait.png';
+import aboutPortrait from '../../imports/carla-about.png';
 
 interface HomePageProps {
   onNavigate: (page: Page) => void;
@@ -199,6 +199,30 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               <div style={{ fontSize: 12, color: T.dim, marginTop: 10, letterSpacing: '0.18em', textTransform: 'uppercase' }}>{label}</div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* About */}
+      <section style={{ background: T.bg, borderBottom: `1px solid ${T.line}`, padding: 'clamp(64px,10vw,120px) 0' }}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="reveal order-2 lg:order-1">
+            <Eyebrow color={T.gold}>About</Eyebrow>
+            <h2 style={{ fontFamily: T.serif, fontSize: 'clamp(34px, 4.5vw, 60px)', fontWeight: 300, color: T.text, letterSpacing: '-0.03em', lineHeight: 1.0, textTransform: 'uppercase', marginTop: 18, marginBottom: 26 }}>
+              Carla<br />Chahwan
+            </h2>
+            <p style={{ fontSize: 18, color: T.sage, lineHeight: 1.75, maxWidth: 520, marginBottom: 20 }}>
+              I'm a UX Strategy &amp; Architecture leader with 9 years building intuitive, data-driven digital experiences across SaaS, eCommerce, and enterprise platforms in the MENA region and globally.
+            </p>
+            <p style={{ fontSize: 18, color: T.sage, lineHeight: 1.75, maxWidth: 520, marginBottom: 32 }}>
+              I start with the business problem and design the system — research, information architecture, and the product direction — that solves it.
+            </p>
+            <button onClick={() => onNavigate('contact')} className="ob-link inline-flex items-center gap-2" style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: T.sans, fontSize: 15, fontWeight: 600, letterSpacing: '0.03em', textTransform: 'uppercase', color: T.text, paddingBottom: 5 }}>
+              Let's talk <ArrowRight size={15} />
+            </button>
+          </div>
+          <div className="reveal order-1 lg:order-2 flex justify-center lg:justify-end">
+            <img src={aboutPortrait} alt="Carla Chahwan" className="w-auto" style={{ maxHeight: 560, objectFit: 'contain' }} />
+          </div>
         </div>
       </section>
 

@@ -1,3 +1,38 @@
 @import './fonts.css';
 @import './tailwind.css';
 @import './theme.css';
+
+/* ── Runtime theme tokens (light default, dark override) ──
+   The design-system object T in playbook.tsx points its surface colours at
+   these variables, so a single [data-theme] on <html> flips the whole site.
+   Accents (teal / terracotta) stay constant across both themes. */
+:root {
+  --bg: #E5E4E0;        /* parchment canvas */
+  --bgCard: #FFFFFF;    /* paper card surface */
+  --bgSoft: #DEDCD4;    /* stone secondary surface */
+  --text: #1D1D1D;      /* ink */
+  --stone: #33332F;     /* dark body copy */
+  --sage: #5A5F57;      /* muted body / secondary */
+  --dim: #8A857A;       /* dim label */
+  --faint: #BFBEBE;     /* faint / struck-through */
+  --line: #D3CDC1;      /* warm ash hairline */
+  --nav-bg: rgba(229, 228, 224, 0.8);
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0E0F13;        /* near-black */
+  --bgCard: #14151A;
+  --bgSoft: #1A1B21;
+  --text: #F4F1EA;      /* warm cream */
+  --stone: #C9CBC0;
+  --sage: #8A9B8E;
+  --dim: #696969;
+  --faint: #3A3D45;
+  --line: #2A2C33;
+  --nav-bg: rgba(14, 15, 19, 0.82);
+  color-scheme: dark;
+}
+
+/* Smooth the flip between themes. */
+body, [data-theme] { transition: background-color .4s ease, color .4s ease; }
