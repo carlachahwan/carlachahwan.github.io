@@ -13,7 +13,7 @@
   --text: #1D1D1D;      /* ink */
   --stone: #33332F;     /* dark body copy */
   --sage: #5A5F57;      /* muted body / secondary */
-  --dim: #8A857A;       /* dim label */
+  --dim: #63605A;       /* dim label (darkened for AA contrast on parchment) */
   --faint: #BFBEBE;     /* faint / struck-through */
   --line: #D3CDC1;      /* warm ash hairline */
   --nav-bg: rgba(229, 228, 224, 0.8);
@@ -27,12 +27,38 @@
   --text: #F4F1EA;      /* warm cream */
   --stone: #C9CBC0;
   --sage: #8A9B8E;
-  --dim: #696969;
+  --dim: #8C8C88;       /* dim label (lightened for AA contrast on near-black) */
   --faint: #3A3D45;
   --line: #2A2C33;
   --nav-bg: rgba(14, 15, 19, 0.82);
   color-scheme: dark;
 }
 
+/* Force-light scope — re-pins the light tokens for a subtree regardless of the
+   global theme. Used on the long-read pages (case studies + project details),
+   which stay light for comfortable reading even when the rest of the site is
+   in dark mode. Custom-property inheritance means these win for descendants. */
+.force-light {
+  --bg: #E5E4E0;
+  --bgCard: #FFFFFF;
+  --bgSoft: #DEDCD4;
+  --text: #1D1D1D;
+  --stone: #33332F;
+  --sage: #5A5F57;
+  --dim: #63605A;
+  --faint: #BFBEBE;
+  --line: #D3CDC1;
+  --nav-bg: rgba(229, 228, 224, 0.8);
+  color-scheme: light;
+}
+
 /* Smooth the flip between themes. */
 body, [data-theme] { transition: background-color .4s ease, color .4s ease; }
+
+/* Keyboard focus — a clear teal ring for keyboard users only (mouse clicks
+   don't trigger :focus-visible), so the site is navigable without a pointer. */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid #2D9D94;
+  outline-offset: 2px;
+  border-radius: 2px;
+}

@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { ArrowRight, Download, Compass, BarChart2, Users, Layers } from 'lucide-react';
+import { ArrowRight, Compass, BarChart2, Users, Layers } from 'lucide-react';
 import { Page } from '../App';
-import { downloadCV } from '../utils/downloadCV';
 import ClientLogos from './ClientLogos';
 import { T, Eyebrow, HexMark, hexPoints, glow } from './playbook';
 import { CaseStudiesArt, MobileLogicArt, WireframeArt, WorkArtKeyframes } from './WorkIllustrations';
-import aboutPortrait from '../../imports/carla-about.png';
+import aboutPortrait from '../../imports/carla-about-2.jpg';
+import { organicRadius } from './playbook';
 
 interface HomePageProps {
   onNavigate: (page: Page) => void;
@@ -169,16 +169,13 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             <span className="ob-line" style={{ animationDelay: '.36s' }}><span style={{ color: T.amber }}>Think</span>&nbsp;&amp; Scale</span>
           </h1>
 
-          <div className="ob-rise" style={{ animationDelay: '.55s', display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', gap: 28, marginTop: 'clamp(28px, 5vh, 56px)' }}>
+          <div className="ob-rise" style={{ animationDelay: '.55s', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 32, marginTop: 'clamp(28px, 5vh, 56px)' }}>
             <p style={{ fontSize: 18, color: T.sage, lineHeight: 1.7, maxWidth: 460 }}>
               A UX Strategy &amp; Architecture leader with 9 years building intuitive, data-driven digital experiences across the MENA region and globally.
             </p>
             <div style={{ display: 'flex', gap: 32, flexShrink: 0 }}>
               <button onClick={() => onNavigate('projects')} className="ob-link inline-flex items-center gap-2" style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: T.sans, fontSize: 15, fontWeight: 600, letterSpacing: '0.03em', textTransform: 'uppercase', color: T.text, paddingBottom: 5 }}>
                 View Projects <ArrowRight size={15} />
-              </button>
-              <button onClick={downloadCV} className="ob-link inline-flex items-center gap-2" style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: T.sans, fontSize: 15, fontWeight: 600, letterSpacing: '0.03em', textTransform: 'uppercase', color: T.text, paddingBottom: 5 }}>
-                Download CV <Download size={14} />
               </button>
             </div>
           </div>
@@ -205,13 +202,13 @@ export default function HomePage({ onNavigate }: HomePageProps) {
       {/* About */}
       <section style={{ background: T.bg, borderBottom: `1px solid ${T.line}`, padding: 'clamp(64px,10vw,120px) 0' }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="reveal order-2 lg:order-1">
+          <div className="reveal order-2 lg:order-2">
             <Eyebrow color={T.gold}>About</Eyebrow>
             <h2 style={{ fontFamily: T.serif, fontSize: 'clamp(34px, 4.5vw, 60px)', fontWeight: 300, color: T.text, letterSpacing: '-0.03em', lineHeight: 1.0, textTransform: 'uppercase', marginTop: 18, marginBottom: 26 }}>
-              Carla<br />Chahwan
+              Hi, I'm Carla Chahwan
             </h2>
             <p style={{ fontSize: 18, color: T.sage, lineHeight: 1.75, maxWidth: 520, marginBottom: 20 }}>
-              I'm a UX Strategy &amp; Architecture leader with 9 years building intuitive, data-driven digital experiences across SaaS, eCommerce, and enterprise platforms in the MENA region and globally.
+              a UX Strategy &amp; Architecture leader with 9 years building intuitive, data-driven digital experiences across SaaS, eCommerce, and enterprise platforms in the MENA region and globally.
             </p>
             <p style={{ fontSize: 18, color: T.sage, lineHeight: 1.75, maxWidth: 520, marginBottom: 32 }}>
               I start with the business problem and design the system — research, information architecture, and the product direction — that solves it.
@@ -220,9 +217,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               Let's talk <ArrowRight size={15} />
             </button>
           </div>
-          <div className="reveal order-1 lg:order-2 flex justify-center lg:justify-end">
-            <div style={{ background: '#EEEBE3', padding: '0 clamp(10px,2.5vw,28px)', display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
-              <img src={aboutPortrait} alt="Carla Chahwan" className="w-auto" style={{ maxHeight: 560, objectFit: 'contain', display: 'block' }} />
+          <div className="reveal order-1 lg:order-1 flex justify-center lg:justify-start">
+            <div style={{ maxWidth: 480, width: '100%', overflow: 'hidden', borderRadius: organicRadius }}>
+              <img src={aboutPortrait} alt="Carla Chahwan" style={{ width: '100%', height: '100%', maxHeight: 620, objectFit: 'cover', display: 'block' }} />
             </div>
           </div>
         </div>

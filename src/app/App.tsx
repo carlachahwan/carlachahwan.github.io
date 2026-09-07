@@ -25,18 +25,44 @@ const CASE_STUDY_PAGES: Page[] = [
   'p-octothink', 'p-one2buy', 'p-azadea', 'p-quickpay', 'p-ksc', 'p-wasm',
 ];
 
+// Hash routing: every page has a readable path in PAGE_META (e.g.
+// /projects/one2buy). We mirror it into the URL hash so the browser's
+// back/forward buttons work and any screen is deep-linkable and shareable.
+const PATH_TO_PAGE = Object.fromEntries(
+  Object.entries(PAGE_META).map(([page, meta]) => [meta.path, page as Page]),
+) as Record<string, Page>;
+
+function pageFromHash(): Page {
+  const path = window.location.hash.replace(/^#/, '') || '/';
+  return PATH_TO_PAGE[path] ?? 'home';
+}
+
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<Page>('home');
+  const [currentPage, setCurrentPage] = useState<Page>(pageFromHash);
   const [projectsTab, setProjectsTab] = useState<TabKey>('case-studies');
 
   // Load GA4 once on mount.
   useEffect(() => { initAnalytics(); }, []);
 
-  // Fire a virtual page view whenever the screen changes (covers the initial
-  // load and every in-app navigation, since this SPA never changes its URL).
+  // Keep app state in sync with the URL hash — covers back/forward and any
+  // deep link the visitor lands on or shares.
+  useEffect(() => {
+    const onHash = () => {
+      setCurrentPage(pageFromHash());
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
+  // Fire a virtual page view and update the document title whenever the
+  // screen changes (covers the initial load and every in-app navigation).
   useEffect(() => {
     const meta = PAGE_META[currentPage];
-    if (meta) trackPageView(meta.path, meta.title);
+    if (meta) {
+      trackPageView(meta.path, meta.title);
+      document.title = meta.title;
+    }
   }, [currentPage]);
 
   const handleNavigate = (page: Page) => {
@@ -47,16 +73,26 @@ export default function App() {
       const tab = tabForPage(currentPage);
       if (tab) setProjectsTab(tab);
     }
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const path = PAGE_META[page]?.path ?? '/';
+    const current = window.location.hash.replace(/^#/, '') || '/';
+    if (current === path) {
+      // Already on this hash (e.g. re-selecting the current page) — update
+      // state directly since no hashchange event will fire.
+      setCurrentPage(page);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Changing the hash triggers the hashchange listener above, which sets
+      // the page and scrolls to top.
+      window.location.hash = path;
+    }
   };
 
   const isCaseStudy = CASE_STUDY_PAGES.includes(currentPage);
 
   return (
     <div className="min-h-screen" style={{ fontFamily: "'Inter', sans-serif", background: 'var(--bg)' }}>
-      <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
-      <main style={{ paddingTop: isCaseStudy ? 72 : 0 }}>
+      <Navigation currentPage={currentPage} onNavigate={handleNavigate} light={isCaseStudy} />
+      <main className={isCaseStudy ? 'force-light' : undefined} style={{ paddingTop: isCaseStudy ? 72 : 0 }}>
         {currentPage === 'home'        && <HomePage onNavigate={handleNavigate} />}
         {currentPage === 'projects'    && <ProjectsPage onNavigate={handleNavigate} initialTab={projectsTab} />}
         {currentPage === 'contact'     && <ContactPage />}

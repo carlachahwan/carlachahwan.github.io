@@ -1,22 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Portfolio website design</title>
-      <meta name="description" content="Showcase your expertise with a professional portfolio website designed for UX Strategy and Architecture managers, featuring projects, case studies, and contact options." />
-      <meta name="robots" content="index, follow" />
-      <style>html, body { height: 100%; margin: 0; background: #0E0F13; } #root { height: 100%; }</style>
-      
-    </head>
+    <title>Carla Chahwan — Strategic UX Architect</title>
+    <meta name="description" content="Carla Chahwan — Strategic UX Architect based in Beirut. UX strategy, information architecture, and product design for SaaS, eCommerce, and enterprise platforms across the MENA region and globally." />
+    <meta name="author" content="Carla Chahwan" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#2D9D94" />
 
-    <body>
-      
-      <div id="root"></div>
-      <script type="module" src="/src/main.tsx"></script>
-      
-    </body>
-  </html>
-  
+    <!-- Favicon: brand hexagon in teal -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Cpath%20d='M16%202%20L28%209%20V23%20L16%2030%20L4%2023%20V9%20Z'%20fill='%232D9D94'/%3E%3C/svg%3E" />
+
+    <!-- Open Graph / social share -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Carla Chahwan" />
+    <meta property="og:title" content="Carla Chahwan — Strategic UX Architect" />
+    <meta property="og:description" content="UX strategy, information architecture, and product design across the MENA region and globally. Explore case studies and projects." />
+    <meta property="og:url" content="https://carlachahwan.github.io/" />
+    <meta property="og:image" content="https://carlachahwan.github.io/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Carla Chahwan — Strategic UX Architect" />
+    <meta name="twitter:description" content="UX strategy, information architecture, and product design across the MENA region and globally." />
+    <meta name="twitter:image" content="https://carlachahwan.github.io/og-image.jpg" />
+
+    <!-- Set theme before first paint to avoid a flash of the wrong background -->
+    <script>
+      try {
+        var t = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+        document.documentElement.dataset.theme = t;
+        document.documentElement.style.background = t === 'dark' ? '#0E0F13' : '#E5E4E0';
+      } catch (e) {}
+    </script>
+    <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

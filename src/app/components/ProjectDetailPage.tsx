@@ -94,13 +94,13 @@ export default function ProjectDetailPage({ data, onNavigate }: Props) {
             <SectionLabel>{label}</SectionLabel>
             {note && <p style={{ fontSize: 16.5, color: T.sage, lineHeight: 1.6, marginBottom: 24, maxWidth: 640 }}>{note}</p>}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 20 }}>
-              {shots.map(({ src, element, caption }, i) => (
-                <figure key={i} style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+              {shots.map(({ src, element, caption, wide }, i) => (
+                <figure key={i} style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: 12, gridColumn: wide ? '1 / -1' : undefined }}>
                   <Zoomable caption={caption}>
-                    <div style={{ borderRadius: 12, overflow: 'hidden', background: element ? '#fff' : T.bgSoft, border: `1px solid ${T.line}`, padding: element ? 16 : 0 }}>
+                    <div style={{ borderRadius: 12, overflow: 'hidden', background: element ? '#fff' : T.bgSoft, border: `1px solid ${T.line}`, padding: element ? 16 : 0, display: wide ? 'flex' : undefined, justifyContent: wide ? 'center' : undefined }}>
                       {element
                         ? element
-                        : <img src={src} alt={caption} loading="lazy" style={{ width: '100%', height: 'auto', display: 'block' }} />}
+                        : <img src={src} alt={caption} loading="lazy" style={wide ? { width: '100%', maxWidth: 340, height: 'auto', display: 'block' } : { width: '100%', height: 'auto', display: 'block' }} />}
                     </div>
                   </Zoomable>
                   <figcaption style={{ fontSize: 14, color: T.sage, textAlign: 'center', lineHeight: 1.5 }}>{caption}</figcaption>

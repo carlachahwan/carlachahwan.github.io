@@ -40,6 +40,11 @@ export const T = {
 export const glow = (color: string = T.amber, strength = 0.28) =>
   `0 4px 16px ${color}${Math.round(strength * 255).toString(16).padStart(2, '0')}`;
 
+/* Organic corner treatment — a soft, asymmetric squircle. Mid-edges stay
+   nearly straight while each corner curves by a different amount, so a photo
+   reads as gently, hand-shaped rather than a hard rectangle or a full blob. */
+export const organicRadius = '34% 12% 40% 16% / 22% 34% 18% 30%';
+
 /* ── Hexagon primitives ─────────────────────────────────────────────────── */
 export function hexPoints(cx: number, cy: number, r: number): string {
   return Array.from({ length: 6 }, (_, i) => {

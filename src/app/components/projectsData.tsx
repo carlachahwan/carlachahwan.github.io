@@ -9,7 +9,14 @@
  */
 import { ReactNode } from 'react';
 import { Page } from '../App';
-import { One2BuyMarketplace, One2BuyProductDetail, One2BuyShop, One2BuyCreateAd, One2BuyChat } from './One2BuyMockups';
+import o2bSplash from '../../imports/projects/one2buy/01-splash.png';
+import o2bHome from '../../imports/projects/one2buy/02-home.png';
+import o2bSellMenu from '../../imports/projects/one2buy/03-sell-menu.png';
+import o2bShopSize from '../../imports/projects/one2buy/04-shop-size.png';
+import o2bEditShop from '../../imports/projects/one2buy/05-edit-shop.png';
+import o2bMyShops from '../../imports/projects/one2buy/06-my-shops.png';
+import o2bCreateAd from '../../imports/projects/one2buy/07-create-ad.png';
+import o2bSupportChat from '../../imports/projects/one2buy/08-support-chat.png';
 import {
   QuickPayLanding, QuickPayOnboarding, QuickPayServices,
   KscHome, KscNewsIndex, KscArticle,
@@ -44,7 +51,7 @@ import azWeb3 from '../../imports/projects/azadea/web-3.jpg';
  * component (`element`) — the wireframe projects have no exported images, only
  * Figma code, so those screens are recreated as components.
  */
-export type Shot = { caption: string; src?: string; element?: ReactNode };
+export type Shot = { caption: string; src?: string; element?: ReactNode; /** Very tall screens get their own full-width row so the grid stays even. */ wide?: boolean };
 
 export type ProjectGallery = {
   label: string;
@@ -137,24 +144,28 @@ export const one2buyData: ProjectData = {
   strategy:
     'Positioned as “Your Shop & Shopping Partner”, One2Buy had to serve a first-time buyer and a small seller with equal ease — across seven GCC markets, in Arabic and English, where trust makes or breaks every peer-to-peer deal.',
   translation:
-    'Selling is a first-class flow (Create / View / Edit Shop), language and country are chosen before entry, and trust is built in — WhatsApp verification, a visible seller identity, and safety guidance right at the point of transaction.',
+    'Selling is a first-class flow: the center “Sell” button opens Create Shop or Create Ads. Sellers pick a tiered shop size, set up the storefront on one screen, and manage up to three shops from a single place — while ads scale from a one-off promotion to a monthly plan.',
   galleries: [
     {
-      label: 'The UI screens',
-      note: 'The screens that carry the platform’s purpose — browse, buy, and sell in one place. Recreated from the Figma source; tap any screen to view it larger.',
+      label: 'The seller journey',
+      note: 'The end-to-end flow, from first launch to running a shop and an ad — exported from the Figma design. Tap any screen to view it larger.',
       shots: [
-        { element: <One2BuyMarketplace />, caption: 'Marketplace — category browse with search and a persistent bottom nav where “Sell” sits center-stage, inviting every user to list.' },
-        { element: <One2BuyProductDetail />, caption: 'Product detail — the listing, related items, and a “Chat to Buy” action right at the point of transaction.' },
-        { element: <One2BuyChat />, caption: 'Chat to Buy — the peer-to-peer negotiation, opened with built-in safety guidance (meet in person, don’t wire money online).' },
-        { element: <One2BuyShop />, caption: 'Seller storefront — the “your shop” half of the value proposition: identity, followers, ratings, and the seller’s own listings.' },
-        { element: <One2BuyCreateAd />, caption: 'Post an Ad — the flow that turns any buyer into a seller: photos, category, price, and publish.' },
+        { src: o2bSplash, caption: '1 · Splash — the promise up front: “Your Shop & Shopping Partner.” One tap into the marketplace.' },
+        { src: o2bHome, caption: '2 · Home — search, filter, and a category grid, with “Sell” anchored at the center of the bottom nav so every buyer is one tap from listing.' },
+        { src: o2bSellMenu, caption: '3 · The Sell action — tapping the center button reveals the two ways to sell: Create Shop or Create Ads.' },
+        { src: o2bShopSize, caption: '4 · Create Shop · pick a size — tiered shops from 9 to 500 items with a yearly / monthly toggle, so sellers pay only for what they need.' },
+        { src: o2bEditShop, wide: true, caption: '5 · Set up the shop — logo, name, category, description, product images, and a clear plan-and-payment summary, all on one manageable screen.' },
+        { src: o2bMyShops, caption: '6 · My Shops — sellers run up to three shops from one place, each with product count, validity dates, and quick Edit / View.' },
+        { src: o2bCreateAd, caption: '7 · Create Ads · choose a plan — a recurring Monthly / Yearly ad or a one-off Single ad, so promotion scales to the seller’s goal.' },
+        { src: o2bSupportChat, caption: '8 · Support chat — in-app help kept one tap away, so questions never push a user out of the app.' },
       ],
     },
   ],
   outcomes: [
     'Selling treated as a first-class flow, not a hidden mode',
-    'Language + country chosen before entry — seven GCC markets, AR/EN as equals',
-    'Trust designed into the transaction: verification, seller identity, safety guidance',
+    'A center-stage “Sell” entry that turns any buyer into a seller',
+    'Tiered shop sizes and flexible ad plans — sellers pay only for what they need',
+    'Up to three shops managed from a single seller dashboard',
     'Category architecture that scales from automotive to electronics',
   ],
 };

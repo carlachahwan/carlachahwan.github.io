@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
-import { Mail, MapPin, Linkedin, ArrowRight, CheckCircle, AlertCircle, Loader, MessageSquare, CalendarClock } from 'lucide-react';
+import { MapPin, ArrowRight, CheckCircle, AlertCircle, Loader, MessageSquare, CalendarClock } from 'lucide-react';
 import { projectId, publicAnonKey } from '/utils/supabase/info';
-import { T, Eyebrow, HexMark, BgHex } from './playbook';
+import { T, Eyebrow, HexMark, BgHex, organicRadius } from './playbook';
 import { trackEvent } from '../utils/analytics';
+import contactHeader from '../../imports/contact-header.jpg';
 
 const SERVER_URL = `https://${projectId}.supabase.co/functions/v1/make-server-101d0b25`;
 
@@ -173,40 +174,30 @@ export default function ContactPage() {
   const labelStyle = { display: 'block', fontFamily: T.sans, fontSize: 13, fontWeight: 500, color: T.sage, marginBottom: 7, textTransform: 'uppercase' as const, letterSpacing: '0.1em' };
 
   const contactDetails = [
-    { icon: <Mail size={18} />, label: 'Email', value: 'chahwancarla1@gmail.com', href: 'mailto:chahwancarla1@gmail.com' },
     { icon: <MapPin size={18} />, label: 'Location', value: 'Beirut, Lebanon', href: null },
-    { icon: <Linkedin size={18} />, label: 'LinkedIn', value: 'linkedin.com/in/carla-chahwan', href: 'https://www.linkedin.com/in/carla-chahwan-142b3595/' },
   ];
 
   return (
     <div style={{ background: T.bg, fontFamily: T.sans }}>
       <style>{`.contact-input::placeholder { color: ${T.faint}; }`}</style>
 
-      {/* Header — compact so the contact options sit above the fold */}
-      <section className="relative overflow-hidden" style={{ background: T.bg, paddingTop: 72 }}>
+      {/* Contact — framed two-column split: identity + direct ways on the left,
+          the Book-a-Meeting / Send-a-Message card on the right. */}
+      <section className="relative overflow-hidden" style={{ background: T.bg, padding: '108px 0 72px' }}>
         <BgHex corner="top-right" opacity={0.09} />
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-10" style={{ paddingTop: 36, paddingBottom: 32 }}>
-          <Eyebrow color={T.amber}>Get in Touch</Eyebrow>
-          <h1 style={{ fontFamily: T.serif, fontSize: 'clamp(30px, 3.4vw, 44px)', fontWeight: 300, color: T.text, letterSpacing: '-0.03em', lineHeight: 1.1, maxWidth: 720, marginTop: 12 }}>
-            Let's build something <span style={{ fontStyle: 'italic', color: T.amber }}>strategically exceptional.</span>
-          </h1>
-          <p style={{ fontSize: 17, color: T.sage, lineHeight: 1.6, maxWidth: 620, marginTop: 12 }}>
-            Book a meeting or send a message — whichever suits you.
-          </p>
-        </div>
-      </section>
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
-      {/* Main content */}
-      <section style={{ background: T.bg, padding: '40px 0 72px', borderTop: `1px solid ${T.line}` }}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
-
-            {/* Left: Contact Details */}
-            <div className="lg:col-span-2">
-              <h2 style={{ fontFamily: T.serif, fontSize: 28, fontWeight: 300, color: T.text, letterSpacing: '-0.02em', marginBottom: 10 }}>
-                Direct Contact
-              </h2>
-              <p style={{ fontSize: 17, color: T.sage, lineHeight: 1.7, marginBottom: 32 }}>
+            {/* Left: banner + direct ways to reach me */}
+            <div className="lg:col-span-5">
+              <div style={{ width: '100%', maxWidth: 520, overflow: 'hidden', borderRadius: organicRadius, marginBottom: 30 }}>
+                <img src={contactHeader} alt="Carla Chahwan" style={{ width: '100%', height: '100%', maxHeight: 320, objectFit: 'cover', display: 'block' }} />
+              </div>
+              <Eyebrow color={T.amber}>Get in Touch</Eyebrow>
+              <h1 style={{ fontFamily: T.serif, fontSize: 'clamp(30px, 3.2vw, 42px)', fontWeight: 300, color: T.text, letterSpacing: '-0.03em', lineHeight: 1.1, marginTop: 12 }}>
+                Let's build something <span style={{ fontStyle: 'italic', color: T.amber }}>strategically exceptional.</span>
+              </h1>
+              <p style={{ fontSize: 17, color: T.sage, lineHeight: 1.7, margin: '14px 0 30px', maxWidth: 460 }}>
                 Available for freelance engagements, senior UX strategy roles, and long-term product partnerships.
               </p>
 
@@ -269,7 +260,7 @@ export default function ContactPage() {
             </div>
 
             {/* Right: Contact Form / Scheduler */}
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-7">
               <div style={{ background: T.bgCard, borderRadius: 16, border: `1px solid ${T.line}`, padding: '36px 32px', overflow: 'hidden' }}>
 
                 {/* Tabs */}
