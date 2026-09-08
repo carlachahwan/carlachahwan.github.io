@@ -152,8 +152,9 @@ export default function HomePage({ onNavigate }: HomePageProps) {
             width: min(54vw, 210px); margin: 0 auto clamp(20px, 4vh, 36px);
             transform: translate3d(var(--tx,0px), var(--ty,0px), 0) scale(var(--sc,1)); }
           /* Hero content is taller than the viewport on phones, so the absolute
-             scroll cue would sit on the CTA — hide it; the content invites scroll. */
-          .ob-scroll { display: none; }
+             scroll cue would sit on the CTA — hide it; the content invites scroll.
+             !important overrides the element's inline display:flex. */
+          .ob-scroll { display: none !important; }
         }
         @media (prefers-reduced-motion: reduce) {
           .reveal, .ob-rise, .ob-line { opacity:1 !important; transform:none !important; animation:none !important; }
