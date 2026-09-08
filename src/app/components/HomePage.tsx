@@ -266,6 +266,26 @@ export default function HomePage({ onNavigate }: HomePageProps) {
               </div>
             ))}
           </div>
+
+          {/* Engagement Types — how clients can work with me, pairing with the
+              expertise above to complete the capabilities story. */}
+          <div className="reveal" style={{ marginTop: 'clamp(44px, 6vw, 68px)', paddingTop: 'clamp(30px, 4vw, 44px)', borderTop: `1px solid ${T.line}` }}>
+            <Eyebrow color={T.gold}>Engagement Types</Eyebrow>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px 40px', marginTop: 22 }}>
+              {[
+                'UX Strategy & Architecture Consulting',
+                'End-to-end Product Design Leadership',
+                'UX Audits & Heuristic Evaluation',
+                'Design System Creation & Governance',
+                'Research Facilitation & Synthesis',
+              ].map(item => (
+                <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <HexMark size={11} color={T.gold} />
+                  <span style={{ fontSize: 16.5, fontWeight: 500, color: T.text }}>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 

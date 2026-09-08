@@ -7,8 +7,6 @@ import { T } from './playbook';
 interface NavigationProps {
   currentPage: Page;
   onNavigate: (page: Page) => void;
-  /** Long-read pages force the light theme; the nav matches so there's no dark seam. */
-  light?: boolean;
 }
 
 const LINKEDIN_URL = 'https://www.linkedin.com/in/carla-chahwan-142b3595/';
@@ -19,7 +17,7 @@ const navLinks: { label: string; page: Page }[] = [
   { label: 'Contact', page: 'contact' },
 ];
 
-export default function Navigation({ currentPage, onNavigate, light = false }: NavigationProps) {
+export default function Navigation({ currentPage, onNavigate }: NavigationProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [dark, setDark] = useState(false);
 
@@ -39,7 +37,7 @@ export default function Navigation({ currentPage, onNavigate, light = false }: N
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 border-b${light ? ' force-light' : ''}`}
+      className="fixed top-0 left-0 right-0 z-50 border-b"
       style={{ background: 'var(--nav-bg)', backdropFilter: 'blur(14px)', borderColor: T.line }}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between" style={{ height: 72 }}>
@@ -81,18 +79,16 @@ export default function Navigation({ currentPage, onNavigate, light = false }: N
             <Download size={13} />
             Download CV
           </button>
-          {!light && (
-            <button
-              onClick={toggleTheme}
-              aria-label="Toggle light or dark theme"
-              className="flex items-center justify-center transition-all"
-              style={{ width: 36, height: 36, border: `1px solid ${T.line}`, color: T.text, borderRadius: 3, background: 'transparent', cursor: 'pointer' }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = T.amber; e.currentTarget.style.color = T.amber; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = T.line; e.currentTarget.style.color = T.text; }}
-            >
-              {dark ? <Sun size={16} /> : <Moon size={16} />}
-            </button>
-          )}
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle light or dark theme"
+            className="flex items-center justify-center transition-all"
+            style={{ width: 36, height: 36, border: `1px solid ${T.line}`, color: T.text, borderRadius: 3, background: 'transparent', cursor: 'pointer' }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = T.amber; e.currentTarget.style.color = T.amber; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = T.line; e.currentTarget.style.color = T.text; }}
+          >
+            {dark ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
           <a
             href={LINKEDIN_URL}
             target="_blank"
@@ -135,16 +131,14 @@ export default function Navigation({ currentPage, onNavigate, light = false }: N
               <Download size={13} />
               Download CV
             </button>
-            {!light && (
-              <button
-                onClick={toggleTheme}
-                aria-label="Toggle light or dark theme"
-                className="flex items-center justify-center"
-                style={{ width: 38, height: 38, border: `1px solid ${T.line}`, color: T.text, borderRadius: 3, background: 'transparent', cursor: 'pointer' }}
-              >
-                {dark ? <Sun size={16} /> : <Moon size={16} />}
-              </button>
-            )}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle light or dark theme"
+              className="flex items-center justify-center"
+              style={{ width: 38, height: 38, border: `1px solid ${T.line}`, color: T.text, borderRadius: 3, background: 'transparent', cursor: 'pointer' }}
+            >
+              {dark ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
             <a
               href={LINKEDIN_URL}
               target="_blank"

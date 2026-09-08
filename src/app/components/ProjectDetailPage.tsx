@@ -93,7 +93,7 @@ export default function ProjectDetailPage({ data, onNavigate }: Props) {
           <section key={label} style={{ marginBottom: 64 }}>
             <SectionLabel>{label}</SectionLabel>
             {note && <p style={{ fontSize: 16.5, color: T.sage, lineHeight: 1.6, marginBottom: 24, maxWidth: 640 }}>{note}</p>}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 20 }}>
+            <div className="proj-gallery">
               {shots.map(({ src, element, caption, wide }, i) => (
                 <figure key={i} style={{ margin: 0, display: 'flex', flexDirection: 'column', gap: 12, gridColumn: wide ? '1 / -1' : undefined }}>
                   <Zoomable caption={caption}>

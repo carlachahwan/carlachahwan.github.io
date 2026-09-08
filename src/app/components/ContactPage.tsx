@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { MapPin, ArrowRight, CheckCircle, AlertCircle, Loader, MessageSquare, CalendarClock } from 'lucide-react';
 import { projectId, publicAnonKey } from '/utils/supabase/info';
-import { T, Eyebrow, HexMark, BgHex, organicRadius } from './playbook';
+import { T, Eyebrow, BgHex, organicRadius } from './playbook';
 import { trackEvent } from '../utils/analytics';
 import contactHeader from '../../imports/contact-header.jpg';
 
@@ -235,27 +235,6 @@ export default function ContactPage() {
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: `${T.mint}14`, border: `1px solid ${T.mint}55`, borderRadius: 6, padding: '10px 16px' }}>
                 <div style={{ width: 8, height: 8, borderRadius: '50%', background: T.mint, boxShadow: `0 0 0 3px ${T.mint}40` }} />
                 <span style={{ fontSize: 15, fontWeight: 500, color: T.text }}>Available for new projects</span>
-              </div>
-
-              {/* Engagement types */}
-              <div style={{ marginTop: 36 }}>
-                <p style={{ fontSize: 13, fontWeight: 500, color: T.dim, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 14 }}>
-                  Engagement Types
-                </p>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                  {[
-                    'UX Strategy & Architecture Consulting',
-                    'End-to-end Product Design Leadership',
-                    'UX Audits & Heuristic Evaluation',
-                    'Design System Creation & Governance',
-                    'Research Facilitation & Synthesis',
-                  ].map(item => (
-                    <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                      <HexMark size={10} />
-                      <span style={{ fontSize: 16, color: T.sage }}>{item}</span>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
 
