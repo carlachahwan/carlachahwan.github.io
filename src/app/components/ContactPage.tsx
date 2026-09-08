@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { MapPin, ArrowRight, CheckCircle, AlertCircle, Loader, MessageSquare, CalendarClock } from 'lucide-react';
+import { ArrowRight, CheckCircle, AlertCircle, Loader, MessageSquare, CalendarClock } from 'lucide-react';
 import { projectId, publicAnonKey } from '/utils/supabase/info';
 import { T, Eyebrow, BgHex, organicRadius } from './playbook';
 import { trackEvent } from '../utils/analytics';
@@ -173,9 +173,6 @@ export default function ContactPage() {
 
   const labelStyle = { display: 'block', fontFamily: T.sans, fontSize: 13, fontWeight: 500, color: T.sage, marginBottom: 7, textTransform: 'uppercase' as const, letterSpacing: '0.1em' };
 
-  const contactDetails = [
-    { icon: <MapPin size={18} />, label: 'Location', value: 'Beirut, Lebanon', href: null },
-  ];
 
   return (
     <div style={{ background: T.bg, fontFamily: T.sans }}>
@@ -197,45 +194,9 @@ export default function ContactPage() {
               <h1 style={{ fontFamily: T.serif, fontSize: 'clamp(30px, 3.2vw, 42px)', fontWeight: 300, color: T.text, letterSpacing: '-0.03em', lineHeight: 1.1, marginTop: 12 }}>
                 Let's build something <span style={{ fontStyle: 'italic', color: T.amber }}>strategically exceptional.</span>
               </h1>
-              <p style={{ fontSize: 17, color: T.sage, lineHeight: 1.7, margin: '14px 0 30px', maxWidth: 460 }}>
+              <p style={{ fontSize: 17, color: T.sage, lineHeight: 1.7, marginTop: 14, maxWidth: 460 }}>
                 Available for freelance engagements, senior UX strategy roles, and long-term product partnerships.
               </p>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 20, marginBottom: 40 }}>
-                {contactDetails.map(({ icon, label, value, href }) => (
-                  <div key={label} style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-                    <div style={{ width: 42, height: 42, borderRadius: 8, background: T.bgCard, border: `1px solid ${T.line}`, display: 'flex', alignItems: 'center', justifyContent: 'center', color: T.amber, flexShrink: 0 }}>
-                      {icon}
-                    </div>
-                    <div>
-                      <p style={{ fontSize: 12, fontWeight: 500, color: T.dim, textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: 4 }}>
-                        {label}
-                      </p>
-                      {href ? (
-                        <a
-                          href={href}
-                          target={href.startsWith('http') ? '_blank' : undefined}
-                          rel="noopener noreferrer"
-                          style={{ fontSize: 17, fontWeight: 500, color: T.text, textDecoration: 'none' }}
-                          onMouseEnter={e => (e.currentTarget.style.color = T.amber)}
-                          onMouseLeave={e => (e.currentTarget.style.color = T.text)}
-                        >
-                          {value}
-                        </a>
-                      ) : (
-                        <p style={{ fontSize: 17, fontWeight: 500, color: T.text }}>{value}</p>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Availability badge */}
-              {/* Availability — mint carries the "open / positive" signal */}
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: `${T.mint}14`, border: `1px solid ${T.mint}55`, borderRadius: 6, padding: '10px 16px' }}>
-                <div style={{ width: 8, height: 8, borderRadius: '50%', background: T.mint, boxShadow: `0 0 0 3px ${T.mint}40` }} />
-                <span style={{ fontSize: 15, fontWeight: 500, color: T.text }}>Available for new projects</span>
-              </div>
             </div>
 
             {/* Right: Contact Form / Scheduler */}
