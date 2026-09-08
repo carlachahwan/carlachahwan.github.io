@@ -145,6 +145,16 @@ export default function HomePage({ onNavigate }: HomePageProps) {
         .ob-link { position: relative; }
         .ob-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; transform: scaleX(1); transform-origin: left; transition: transform .4s cubic-bezier(.2,.7,.2,1); }
         .ob-link:hover::after { transform: scaleX(0); transform-origin: right; }
+        /* On phones the sphere would sit on top of the headline, so drop it into
+           normal flow as a centered accent above the text instead of overlapping. */
+        @media (max-width: 640px) {
+          .ob-sphere-wrap { position: relative; right: auto; top: auto;
+            width: min(54vw, 210px); margin: 0 auto clamp(20px, 4vh, 36px);
+            transform: translate3d(var(--tx,0px), var(--ty,0px), 0) scale(var(--sc,1)); }
+          /* Hero content is taller than the viewport on phones, so the absolute
+             scroll cue would sit on the CTA — hide it; the content invites scroll. */
+          .ob-scroll { display: none; }
+        }
         @media (prefers-reduced-motion: reduce) {
           .reveal, .ob-rise, .ob-line { opacity:1 !important; transform:none !important; animation:none !important; }
           .ob-sphere, .ob-scroll { animation: none !important; }
