@@ -26,7 +26,7 @@
   --bgSoft: #1A1B21;
   --text: #F4F1EA;      /* warm cream */
   --stone: #FFFFFF;     /* body copy — white (dark mode) */
-  --sage: #8A9B8E;
+  --sage: #FFFFFF;      /* secondary / nav / body text — white (dark mode) */
   --dim: #8C8C88;       /* dim label (lightened for AA contrast on near-black) */
   --faint: #3A3D45;
   --line: #2A2C33;
